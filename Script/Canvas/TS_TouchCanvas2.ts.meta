@@ -1,0 +1,83 @@
+fileFormatVersion: 2
+guid: bc34601c06fcdc94ca1592681a2df55f
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst TS_GameManager_1 = require(\"../System/TS_GameManager\");\r\nclass
+    TS_TouchCanvas2 extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this.isHitBtnDown = false;\r\n   
+    }\r\n    //////////////////////////////////////////////////////////////\r\n   
+    Awake() {\r\n        this.canvas.planeDistance = 1;\r\n        // Hit Start\r\n       
+    this.hitBtn.OnPointDownEvent.AddListener(() => {\r\n            this.tennisUI.SetActive(true);\r\n           
+    this.lineImg.gameObject.SetActive(true);\r\n            // if found coordinates,
+    prepare to hit\r\n            if (this.FindHitButtonPressPos() != null) {\r\n               
+    let touchS = this.FindHitButtonPressPos();\r\n                //this.hitLineStartPos
+    = touchS.position;\r\n                this.hitLineStartPos = new UnityEngine_1.Vector2(this.hitImg.transform.position.x,
+    this.hitImg.transform.position.y);\r\n                //this.lineImg.transform.position
+    = new Vector3(touchS.position.x, touchS.position.y, 0);\r\n                this.lineImg.transform.position
+    = new UnityEngine_1.Vector3(this.hitLineStartPos.x, this.hitLineStartPos.y, 0);\r\n               
+    this.isHitBtnDown = true;\r\n            }\r\n        });\r\n        // Hit End\r\n       
+    this.hitBtn.OnPointUpEvent.AddListener(() => {\r\n            this.isHitBtnDown
+    = false;\r\n            this.tennisUI.SetActive(false);\r\n            this.lineImg.gameObject.SetActive(false);\r\n           
+    if (UnityEngine_1.Input.touchCount != 0) {\r\n                //console.log(`=========================================`);\r\n               
+    if (this.FindHitButtonPressPos() == null)\r\n                    return;\r\n               
+    // caluate the parecentage of ball pos from the tennis ui image \r\n               
+    let rectangleSize = this.uiRectangle.rect.size;\r\n                let touchChange
+    = new UnityEngine_1.Vector2(this.FindHitButtonPressPos().position.x - this.edge3.position.x,
+    this.FindHitButtonPressPos().position.y - this.edge3.position.y);\r\n               
+    //console.log(`touchChange 1 : ${touchChange.x} ${touchChange.y}`);\r\n               
+    if (touchChange.x < 0)\r\n                    touchChange.x = touchChange.x *
+    -1;\r\n                //console.log(`touchChange 2 : ${touchChange.x} ${touchChange.y}`);\r\n               
+    let clickRatio = new UnityEngine_1.Vector2(touchChange.x / rectangleSize.x, touchChange.y
+    / rectangleSize.y);\r\n                //console.log(`touchChange clickRatio
+    : ${clickRatio.x} ${clickRatio.y}`);\r\n                let targetPos = TS_GameManager_1.default.GetInstance().CaluatePos(clickRatio.x,
+    clickRatio.y);\r\n                if (ZEPETO_Script_1.ZepetoScriptBehaviour.op_Inequality(TS_GameManager_1.default.GetInstance().GetLocalPlayerController,
+    null)) {\r\n                    // Hand over found rate values\r\n                   
+    TS_GameManager_1.default.GetInstance().GetLocalPlayerController.HitBall(targetPos);\r\n               
+    }\r\n            }\r\n        });\r\n        // If player move and stop, look
+    at the tennis\r\n        this.moveTouchBtn.OnPointerUpEvent.AddListener(() =>
+    {\r\n            //console.log(`charater move stop`);\r\n            TS_GameManager_1.default.GetInstance().playerMoveStopAndDirNet();\r\n       
+    });\r\n    }\r\n    Update() {\r\n        // While the player presses the hit
+    button\r\n        if (this.isHitBtnDown) {\r\n            if (UnityEngine_1.Input.touchCount
+    > 0) {\r\n                // Draw an arrow\r\n                if (this.FindHitButtonPressPos()
+    != null) {\r\n                    this.lineImg.transform.localScale = new UnityEngine_1.Vector3(UnityEngine_1.Vector2.Distance(this.FindHitButtonPressPos().position,
+    this.hitLineStartPos), 1, 0);\r\n                    this.lineImg.transform.localRotation
+    = UnityEngine_1.Quaternion.Euler(0, 0, this.AngleInDeg(this.hitLineStartPos,
+    this.FindHitButtonPressPos().position));\r\n                }\r\n               
+    else {\r\n                    this.isHitBtnDown = false;\r\n                   
+    this.lineImg.gameObject.SetActive(false);\r\n                }\r\n           
+    }\r\n        }\r\n        if (UnityEngine_1.Input.touchCount == 0 || (UnityEngine_1.Input.touchCount
+    == 1 && this.FindHitButtonPressPos() == null)) {\r\n            this.tennisUI.SetActive(false);\r\n           
+    this.lineImg.gameObject.SetActive(false);\r\n        }\r\n    }\r\n    ///////////////////////////////////////////////////////////////////////\r\n   
+    FindHitButtonPressPos() {\r\n        let checkHitBtnDown = false;\r\n       
+    let touchE = UnityEngine_1.Input.GetTouch(0);\r\n        for (let num = 0; num
+    < UnityEngine_1.Input.touchCount; num++) {\r\n            let touchPos = UnityEngine_1.Input.GetTouch(num);\r\n           
+    //console.log(`touchPos : ${touchPos.position.x} ${touchPos.position.y}`);\r\n           
+    if (touchPos.position.x >= (UnityEngine_1.Screen.width / 2)) {\r\n               
+    checkHitBtnDown = true;\r\n                touchE = touchPos;\r\n           
+    }\r\n        }\r\n        if (checkHitBtnDown)\r\n            return touchE;\r\n       
+    else\r\n            return null;\r\n    }\r\n    AngleInRad(vec1, vec2) {\r\n       
+    return UnityEngine_1.Mathf.Atan2(vec2.y - vec1.y, vec2.x - vec1.x);\r\n    }\r\n   
+    AngleInDeg(vec1, vec2) {\r\n        return this.AngleInRad(vec1, vec2) * 180
+    / UnityEngine_1.Mathf.PI;\r\n    }\r\n}\r\nexports.default = TS_TouchCanvas2;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfVG91Y2hDYW52YXMyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfVG91Y2hDYW52YXMyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQStHO0FBQy9HLGlEQUFxRDtBQUNyRCw2REFBc0Q7QUFNdEQsTUFBcUIsZUFBZ0IsU0FBUSxxQ0FBcUI7SUFBbEU7O1FBV1ksaUJBQVksR0FBYSxLQUFLLENBQUM7SUE2SDNDLENBQUM7SUExR0csOERBQThEO0lBRXRELEtBQUs7UUFDVCxJQUFJLENBQUMsTUFBTSxDQUFDLGFBQWEsR0FBRyxDQUFDLENBQUM7UUFFOUIsWUFBWTtRQUNaLElBQUksQ0FBQyxNQUFNLENBQUMsZ0JBQWdCLENBQUMsV0FBVyxDQUFDLEdBQUUsRUFBRTtZQUN6QyxJQUFJLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUM5QixJQUFJLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7WUFFeEMsdUNBQXVDO1lBQ3ZDLElBQUcsSUFBSSxDQUFDLHFCQUFxQixFQUFFLElBQUksSUFBSSxFQUFDO2dCQUNwQyxJQUFJLE1BQU0sR0FBRyxJQUFJLENBQUMscUJBQXFCLEVBQUUsQ0FBQztnQkFDMUMseUNBQXlDO2dCQUN6QyxJQUFJLENBQUMsZUFBZSxHQUFHLElBQUkscUJBQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxFQUFFLElBQUksQ0FBQyxNQUFNLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDdkcseUZBQXlGO2dCQUN6RixJQUFJLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxRQUFRLEdBQUcsSUFBSSxxQkFBTyxDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQyxFQUFFLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFD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","assetPath":"Assets/_Main/Script/Canvas/TS_TouchCanvas2.ts","manifest":{"properties":[{"assembly":"UnityEngine.UIModule","name":"canvas","type":"UnityEngine.Canvas","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Default\""]},{"name":"SerializeField","args":[]}]},{"assembly":"ZEPETO.Character.Controller","name":"moveTouchBtn","type":"ZEPETO.Character.Controller.ZepetoScreenTouchpad","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"lineImg","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"hitImg","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"ZEPETO.Character.Controller","name":"hitBtn","type":"ZEPETO.Character.Controller.ZepetoScreenButton","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Hit
+    Button\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"edge1","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"edge2","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"edge3","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"edge4","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"uiRectangle","type":"UnityEngine.RectTransform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"tennisUI","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"TS_TouchCanvas2","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: d4bad381a0cdaf8afa6abcc9831b41da
+  onlyWriteTrigger: 0

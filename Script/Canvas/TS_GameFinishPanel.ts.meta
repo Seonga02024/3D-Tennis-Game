@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 63bac4d80691786499db52add8518eec
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nclass TS_GameFinishPanel
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    OnWinnerPanel(isActive)
+    {\\r\\n        this.mainPanel.SetActive(isActive);\\r\\n    }\\r\\n    ChangeWinnerText(winnerSessionId)
+    {\\r\\n        this.winnerInfoTxt.text = winnerSessionId + \\\"\uB2D8\uC774 \uC2B9\uB9AC\\\";\\r\\n   
+    }\\r\\n}\\r\\nexports.default = TS_GameFinishPanel;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfR2FtZUZpbmlzaFBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfR2FtZUZpbmlzaFBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXlDO0FBRXpDLGlEQUFxRDtBQUVyRCxNQUFxQixrQkFBbUIsU0FBUSxxQ0FBcUI7SUFPMUQsYUFBYSxDQUFDLFFBQWtCO1FBQ25DLElBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ3ZDLENBQUM7SUFFTSxnQkFBZ0IsQ0FBQyxlQUF3QjtRQUM1QyxJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksR0FBRyxlQUFlLEdBQUcsT0FBTyxDQUFDO0lBQ3hELENBQUM7Q0FFSjtBQWZELHFDQWVDIn0=\",\"assetPath\":\"Assets/_Main/Script/Canvas/TS_GameFinishPanel.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mainPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"Header\",\"args\":[\"\\\"Default\\\"\"]},{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"winnerInfoTxt\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"TS_GameFinishPanel\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: 07f61dbda44a8002be037405321f3acb
+  onlyWriteTrigger: 0

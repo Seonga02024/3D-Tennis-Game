@@ -1,0 +1,71 @@
+fileFormatVersion: 2
+guid: 701134439d226a44c92ee69a2d66bb6b
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst TS_PlayerController_1
+    = require(\"../System/Player/TS_PlayerController\");\r\nconst ZEPETO_Multiplay_1
+    = require(\"ZEPETO.Multiplay\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    TS_SystemCanvas_1 = require(\"../Canvas/TS_SystemCanvas\");\r\nclass AnimationData
+    {\r\n}\r\nclass TS_PlayerControllerManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.room
+    = null;\r\n        this.playerControllers = new Map();\r\n        /* Values */\r\n       
+    this.playerInfos = new Map();\r\n    }\r\n    static GetInstance() {\r\n       
+    if (!TS_PlayerControllerManager.Instance) {\r\n            const targetObj =
+    UnityEngine_1.GameObject.Find(\"PlayerControllerManager\");\r\n            if
+    (targetObj)\r\n                TS_PlayerControllerManager.Instance = targetObj.GetComponent($typeof(TS_PlayerControllerManager));\r\n       
+    }\r\n        return TS_PlayerControllerManager.Instance;\r\n    }\r\n    Start()
+    {\r\n        this.multiplay.add_RoomCreated((room) => {\r\n            this.room
+    = room;\r\n            room.AddMessageHandler($typeof(AnimationData), \"SendAnimationDataToSever\",
+    message => {\r\n                //console.log(`SendAnimationDataToSever 1`);\r\n               
+    let playerController = this.GetPlayerController(message.sessionId);\r\n               
+    if (playerController && message.animationName != null && message.isActive !=
+    null) {\r\n                    //console.log(`SendAnimationDataToSever 2`);\r\n                   
+    playerController.playPlayerAnimation(message.animationName, message.isActive);\r\n               
+    }\r\n            });\r\n        });\r\n    }\r\n    ////////////////////////////////////////////////////////////\r\n   
+    GetPlayerController(sessionId) {\r\n        return this.playerControllers.get(sessionId);\r\n   
+    }\r\n    SetPlayerController(sessionId, playerController) {\r\n        // add
+    player controller\r\n        this.playerControllers.set(sessionId, playerController);\r\n   
+    }\r\n    AddPlayerInfo(sessionId, userId) {\r\n        console.log(`AddPlayerInfo
+    ${sessionId} ${userId}`);\r\n        this.playerInfos.set(sessionId, {\r\n           
+    nickName: \"\",\r\n            userId: userId,\r\n            profile: null\r\n       
+    });\r\n        // add nick name\r\n        let ids = [userId];\r\n        ZEPETO_World_1.ZepetoWorldHelper.GetUserInfo(ids,
+    (info) => {\r\n            this.playerInfos.get(sessionId).nickName = info[0].name;\r\n       
+    }, (error) => {\r\n            console.log(error);\r\n        });\r\n       
+    // add profile texture\r\n        ZEPETO_World_1.ZepetoWorldHelper.GetProfileTexture(userId,
+    (texture) => {\r\n            this.playerInfos.get(sessionId).profile = texture;\r\n       
+    }, (error) => {\r\n            this.playerInfos.get(sessionId).profile = null;\r\n       
+    });\r\n    }\r\n    SetGamePlayerInfo(player1SessionId, player2SessionId) {\r\n       
+    console.log(`SetGamePlayerInfo ${player1SessionId} ${player2SessionId}`);\r\n       
+    let player1Info = this.playerInfos.get(player1SessionId);\r\n        let player2Info
+    = this.playerInfos.get(player2SessionId);\r\n        if (player1Info && player2Info)
+    {\r\n            console.log(`SetGamePlayerInfo setting`);\r\n            TS_SystemCanvas_1.default.GetInstance().GetScorePanel().SetGamePlayerInfo(player1Info.profile,
+    player1Info.nickName, player2Info.profile, player2Info.nickName);\r\n       
+    }\r\n    }\r\n    SetWinnerInfo(winnerSessionId) {\r\n        console.log(`SetWinnerInfo
+    ${winnerSessionId}`);\r\n        let winnerName = this.playerInfos.get(winnerSessionId);\r\n       
+    if (winnerName) {\r\n            console.log(`SetWinnerInfo setting`);\r\n           
+    TS_SystemCanvas_1.default.GetInstance().GetGameFinishPanel().ChangeWinnerText(winnerName.nickName);\r\n       
+    }\r\n    }\r\n    ////////////////////////////////////////////////////////////\r\n   
+    SendAnimationData(sessionId, tennisAni, bool) {\r\n        const data = new AnimationData();\r\n       
+    data.sessionId = sessionId;\r\n        data.animationName = tennisAni;\r\n       
+    data.isActive = bool;\r\n        this.room.Send(\"SendAnimationData\", data);\r\n   
+    }\r\n}\r\nexports.default = TS_PlayerControllerManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfUGxheWVyQ29udHJvbGxlck1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUU19QbGF5ZXJDb250cm9sbGVyTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFrRDtBQUNsRCxpREFBcUQ7QUFDckQsOEVBQStGO0FBQy9GLHVEQUF3QztBQUd4QywrQ0FBaUQ7QUFDakQsK0RBQXdEO0FBRXhELE1BQU0sYUFBYTtDQUlsQjtBQVNELE1BQXFCLDBCQUEyQixTQUFRLHFDQUFxQjtJQUE3RTs7UUFLWSxTQUFJLEdBQVUsSUFBSSxDQUFDO1FBQ25CLHNCQUFpQixHQUFzQyxJQUFJLEdBQUcsRUFBK0IsQ0FBQztRQUV0RyxZQUFZO1FBQ0osZ0JBQVcsR0FBNkIsSUFBSSxHQUFHLEVBQXNCLENBQUM7SUF3RmxGLENBQUM7SUFwRlUsTUFBTSxDQUFDLFdBQVc7UUFDckIsSUFBSSxDQUFDLDBCQUEwQixDQUFDLFFBQVEsRUFBRTtZQUN0QyxNQUFNLFNBQVMsR0FBRyx3QkFBVSxDQUFDLElBQUksQ0FBQyx5QkFBeUIsQ0FBQyxDQUFDO1lBQzdELElBQUksU0FBUztnQkFDVCwwQkFBMEIsQ0FBQyxRQUFRLEdBQUcsU0FBUyxDQUFDLFlBQVksU0FBQywwQkFBMEIsRUFBRyxDQUFDO1NBQ2xHO1FBQ0QsT0FBTywwQkFBMEIsQ0FBQyxRQUFRLENBQUM7SUFDL0MsQ0FBQztJQUVELEtBQUs7UUFDRCxJQUFJLENBQUMsU0FBUyxpQkFBZ0IsQ0FBQyxJQUFTLEVBQUUsRUFBRTtZQUN4QyxJQUFJLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztZQUNqQixJQUFJLENBQUMsaUJBQWlCLFNBQUMsYUFBYSxHQUFFLDBCQUEwQixFQUFFLE9BQU8sQ0FBQyxFQUFFO2dCQUN4RSw0Q0FBNEM7Z0JBQzVDLElBQUksZ0JBQWdCLEdBQUcsSUFBSSxDQUFDLG1CQUFtQixDQUFDLE9BQU8sQ0FBQyxTQUFTLENBQUMsQ0FBQztnQkFDbkUsSUFB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","assetPath":"Assets/_Main/Script/Controller/TS_PlayerControllerManager.ts","manifest":{"properties":[{"assembly":"ZEPETO.World","name":"multiplay","type":"ZEPETO.World.ZepetoWorldMultiplay","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Default\""]},{"name":"SerializeField","args":[]}]}],"name":"AnimationData","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 427424240567c6429ab2c909544d538d
+  onlyWriteTrigger: 0

@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 91b22f708c9407146bc4ff6621909b2f
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    TS_TimePanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    OnTimePanel(isActive)
+    {\r\n        this.mainPanel.SetActive(isActive);\r\n    }\r\n    ChangeTimeText(num)
+    {\r\n        this.timeTxt.text = num.toString();\r\n    }\r\n}\r\nexports.default
+    = TS_TimePanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfVGltZVBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfVGltZVBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUEsaURBQXFEO0FBRXJELE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFPcEQsV0FBVyxDQUFDLFFBQWtCO1FBQ2pDLElBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ3ZDLENBQUM7SUFFTSxjQUFjLENBQUMsR0FBWTtRQUM5QixJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksR0FBRyxHQUFHLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDdkMsQ0FBQztDQUVKO0FBZkQsK0JBZUMifQ==","assetPath":"Assets/_Main/Script/Canvas/TS_TimePanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mainPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Default\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"timeTxt","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"TS_TimePanel","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 97be6924cccd930626870bd9081c7107
+  onlyWriteTrigger: 0

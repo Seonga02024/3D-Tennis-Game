@@ -1,0 +1,55 @@
+fileFormatVersion: 2
+guid: 667c15e0244f8024b9461f3f8a7ed6c6
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst TS_TestCanvas_1 = require(\"./TS_TestCanvas\");\r\nconst
+    TS_ScorePanel_1 = require(\"./TS_ScorePanel\");\r\nconst TS_TimePanel_1 = require(\"./TS_TimePanel\");\r\nconst
+    TS_GameFinishPanel_1 = require(\"./TS_GameFinishPanel\");\r\nclass TS_SystemCanvas
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        /* Instances */\r\n        // basic ui\r\n       
+    //private basicIconPanelTS : TS_BasicIconPanel = null;\r\n        // game ui\r\n       
+    this.testPanelTS = null;\r\n        this.scorePanelTS = null;\r\n        this.timePanelTS
+    = null;\r\n        this.gameFinishPanelTS = null;\r\n    }\r\n    static GetInstance()
+    {\r\n        if (!TS_SystemCanvas.Instance) {\r\n            const targetObj
+    = UnityEngine_1.GameObject.Find(\"SystemCanvas\");\r\n            if (targetObj)\r\n               
+    TS_SystemCanvas.Instance = targetObj.GetComponent($typeof(TS_SystemCanvas));\r\n       
+    }\r\n        return TS_SystemCanvas.Instance;\r\n    }\r\n    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\r\n   
+    // Main Logic\r\n    // // basic ui\r\n    // public GetBasicIconPanel() : TS_BasicIconPanel
+    {\r\n    //     if(this.basicIconPanelTS == null) {\r\n    //         this.basicIconPanelTS
+    = this.basicIconPanel.GetComponent<TS_BasicIconPanel>();\r\n    //     }\r\n   
+    //     return this.basicIconPanelTS;\r\n    // }\r\n    GetTestPanel() {\r\n       
+    if (ZEPETO_Script_1.ZepetoScriptBehaviour.op_Equality(this.testPanelTS, null))
+    {\r\n            this.testPanelTS = this.testPanel.GetComponent($typeof(TS_TestCanvas_1.default));\r\n       
+    }\r\n        return this.testPanelTS;\r\n    }\r\n    GetScorePanel() {\r\n       
+    if (ZEPETO_Script_1.ZepetoScriptBehaviour.op_Equality(this.scorePanelTS, null))
+    {\r\n            this.scorePanelTS = this.scorePanel.GetComponent($typeof(TS_ScorePanel_1.default));\r\n       
+    }\r\n        return this.scorePanelTS;\r\n    }\r\n    GetTimePanel() {\r\n       
+    if (ZEPETO_Script_1.ZepetoScriptBehaviour.op_Equality(this.timePanelTS, null))
+    {\r\n            this.timePanelTS = this.timePanel.GetComponent($typeof(TS_TimePanel_1.default));\r\n       
+    }\r\n        return this.timePanelTS;\r\n    }\r\n    GetGameFinishPanel() {\r\n       
+    if (ZEPETO_Script_1.ZepetoScriptBehaviour.op_Equality(this.gameFinishPanelTS,
+    null)) {\r\n            this.gameFinishPanelTS = this.gameFinishPanel.GetComponent($typeof(TS_GameFinishPanel_1.default));\r\n       
+    }\r\n        return this.gameFinishPanelTS;\r\n    }\r\n}\r\nexports.default
+    = TS_SystemCanvas;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfU3lzdGVtQ2FudmFzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfU3lzdGVtQ2FudmFzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWlEO0FBQ2pELGlEQUFxRDtBQUNyRCxtREFBNEM7QUFDNUMsbURBQTRDO0FBQzVDLGlEQUEwQztBQUMxQyw2REFBc0Q7QUFFdEQsTUFBcUIsZUFBZ0IsU0FBUSxxQ0FBcUI7SUFBbEU7O1FBb0JJLGVBQWU7UUFDZixXQUFXO1FBQ1gsc0RBQXNEO1FBQ3RELFVBQVU7UUFDRixnQkFBVyxHQUFtQixJQUFJLENBQUM7UUFDbkMsaUJBQVksR0FBbUIsSUFBSSxDQUFDO1FBQ3BDLGdCQUFXLEdBQWtCLElBQUksQ0FBQztRQUNsQyxzQkFBaUIsR0FBd0IsSUFBSSxDQUFDO0lBb0QxRCxDQUFDO0lBaERVLE1BQU0sQ0FBQyxXQUFXO1FBQ3JCLElBQUksQ0FBQyxlQUFlLENBQUMsUUFBUSxFQUFFO1lBQzNCLE1BQU0sU0FBUyxHQUFHLHdCQUFVLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDO1lBQ2xELElBQUksU0FBUztnQkFDVCxlQUFlLENBQUMsUUFBUSxHQUFHLFNBQVMsQ0FBQyxZQUFZLFNBQUMsZUFBZSxFQUFHLENBQUM7U0FDNUU7UUFDRCxPQUFPLGVBQWUsQ0FBQyxRQUFRLENBQUM7SUFDcEMsQ0FBQztJQUVELDBJQUEwSTtJQUMxSSxhQUFhO0lBRWIsY0FBYztJQUNkLG1EQUFtRDtJQUNuRCwwQ0FBMEM7SUFDMUMseUZBQXlGO0lBQ3pGLFFBQVE7SUFDUixvQ0FBb0M7SUFDcEMsSUFBSTtJQUVHLFlBQVk7UUFDZixJQTFEQyxxQ0FBcUIsQ0FxRnFsSSxXQUFZLENBM0JwbkksSUFBSSxDQUFDLFdBQVcsRUFBSSxJQUFJLEdBQUU7WUFDekIsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyx1QkFBYSxFQUFHLENBQUM7U0FDbkU7UUFDRCxPQUFPLElBQUksQ0FBQyxXQUFXLENBQUM7SUFDNUIsQ0FBQztJQUVNLGFBQWE7UUFDaEIsSUFqRUMscUNBQXFCLENBcUZxbEksV0FBWSxDQXBCcG5JLElBQUksQ0FBQyxZQUFZLEVBQUksSUFBSSxHQUFFO1lBQzFCLElBQUksQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsdUJBQWEsRUFBRyxDQUFDO1NBQ3JFO1FBQ0QsT0FBTyxJQUFJLENBQUMsWUFBWSxDQUFDO0lBQzdCLENBQUM7SUFFTSxZQUFZO1FBQ2YsSUF4RUMscUNBQXFCLENBcUZxbEksV0FBWSxDQWJwbkksSUFBSSxDQUFDLFdBQVcsRUFBSSxJQUFJLEdBQUU7WUFDekIsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBWSxFQUFHLENBQUM7U0FDbEU7UUFDRCxPQUFPLElBQUksQ0FBQyxXQUFXLENBQUM7SUFDNUIsQ0FBQztJQUVNLGtCQUFrQjtRQUNyQixJQS9FQyxxQ0FBcUIsQ0FxRnFsSSxXQUFZLENBTnBuSSxJQUFJLENBQUMsaUJBQWlCLEVBQUksSUFBSSxHQUFFO1lBQy9CLElBQUksQ0FBQyxpQkFBaUIsR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDLFlBQVksU0FBQyw0QkFBa0IsRUFBRyxDQUFDO1NBQ3BGO1FBQ0QsT0FBTyxJQUFJLENBQUMsaUJBQWlCLENBQUM7SUFDbEMsQ0FBQztDQUVKO0FBL0VELGtDQStFQyJ9","assetPath":"Assets/_Main/Script/Canvas/TS_SystemCanvas.ts","manifest":{"properties":[{"assembly":"UnityEngine.UIModule","name":"canvas","type":"UnityEngine.Canvas","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Default\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"basicIconPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"[Basic
+    UI]\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"testPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"[Game
+    UI]\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"scorePanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"timePanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"gameFinishPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"TS_SystemCanvas","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 743397c655f1dff8e9e36cf18e0ca01b
+  onlyWriteTrigger: 0

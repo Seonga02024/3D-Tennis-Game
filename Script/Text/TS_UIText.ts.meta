@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: 4d3702cec616db9409745d00bcb90ff3
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nclass TS_UIText {\r\n}\r\nexports.default = TS_UIText;\r\nTS_UIText.titlePanel
+    = new Map([\r\n    [\r\n        0 /* Language.Korean */, [\r\n            \"play\"\r\n       
+    ]\r\n    ],\r\n    [\r\n        1 /* Language.English */, [\r\n            \"play\"\r\n       
+    ]\r\n    ],\r\n    [\r\n        2 /* Language.Japanese */, [\r\n            \"play\"\r\n       
+    ]\r\n    ],\r\n    [\r\n        3 /* Language.Chinese */, [\r\n            \"play\"\r\n       
+    ]\r\n    ],\r\n    [\r\n        4 /* Language.Indonesian */, [\r\n           
+    \"play\"\r\n        ]\r\n    ],\r\n    [\r\n        5 /* Language.Thai */, [\r\n           
+    \"play\"\r\n        ]\r\n    ],\r\n    [\r\n        6 /* Language.ChineseSimplified
+    */, [\r\n            \"play\"\r\n        ]\r\n    ],\r\n    [\r\n        7 /*
+    Language.French */, [\r\n            \"play\"\r\n        ]\r\n    ],\r\n]);\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfVUlUZXh0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfVUlUZXh0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUEsTUFBcUIsU0FBUzs7QUFBOUIsNEJBNkNDO0FBM0NpQixvQkFBVSxHQUE2QixJQUFJLEdBQUcsQ0FBQztJQUN6RDtpQ0FDcUI7WUFDYixNQUFNO1NBQ1Q7S0FDSjtJQUNEO2tDQUNzQjtZQUNkLE1BQU07U0FDVDtLQUNKO0lBQ0Q7bUNBQ3VCO1lBQ2YsTUFBTTtTQUNUO0tBQ0o7SUFDRDtrQ0FDc0I7WUFDZCxNQUFNO1NBQ1Q7S0FDSjtJQUNEO3FDQUN5QjtZQUNqQixNQUFNO1NBQ1Q7S0FDSjtJQUNEOytCQUNtQjtZQUNYLE1BQU07U0FDVDtLQUNKO0lBQ0Q7NENBQ2dDO1lBQ3hCLE1BQU07U0FDVDtLQUNKO0lBQ0Q7aUNBQ3FCO1lBQ2IsTUFBTTtTQUNUO0tBQ0o7Q0FDSixDQUFDLENBQUMifQ==","assetPath":"Assets/_Main/Script/Text/TS_UIText.ts","manifest":{"properties":[],"name":"TS_UIText","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: bbe61052cb26b29679fdae1a85fb731c
+  onlyWriteTrigger: 0

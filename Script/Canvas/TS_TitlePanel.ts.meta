@@ -1,0 +1,46 @@
+fileFormatVersion: 2
+guid: 3739b42b26ec62e42b6842e6c9bdbb93
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_2 = require(\"UnityEngine\");\r\nconst UnityEngine_3 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_4 = require(\"UnityEngine\");\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst TS_Text_1 = require(\"../Data/TS_Text\");\r\nconst
+    TS_UIText_1 = require(\"../Text/TS_UIText\");\r\nclass TS_TitlePanel extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    this.timeOver = false;\r\n        /* Const Values */\r\n        this.WAIT_TIME
+    = 4;\r\n        /* Coroutine */\r\n        this.waitCoroutine = null;\r\n   
+    }\r\n    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\r\n   
+    // Event Function\r\n    Start() {\r\n        this.offButton.onClick.AddListener(()
+    => {\r\n            // if time over\r\n            if (this.timeOver) {\r\n               
+    this.titlePanel.SetActive(false);\r\n            }\r\n        });\r\n       
+    // set title image\r\n        this.SetTitleImageSize();\r\n        // set title
+    text\r\n        this.UpdateEnterBtnLanguage();\r\n        // loading effect\r\n       
+    this.waitCoroutine = this.StartCoroutine(this.WaitCoroutine());\r\n    }\r\n   
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\r\n   
+    // Title\r\n    SetTitleImageSize() {\r\n        let width = this.titlePanel.GetComponent($typeof(UnityEngine_1.RectTransform)).rect.width;\r\n       
+    this.mainImg.GetComponent($typeof(UnityEngine_1.RectTransform)).sizeDelta = new
+    UnityEngine_2.Vector2(width, width);\r\n    }\r\n    *WaitCoroutine() {\r\n       
+    yield new UnityEngine_3.WaitForSeconds(this.WAIT_TIME);\r\n        this.timeOver
+    = true;\r\n    }\r\n    UpdateEnterBtnLanguage() {\r\n        this.offButtonTxt.text
+    = TS_UIText_1.default.titlePanel.get(TS_Text_1.default.GetInstance().CurLanguage)[0];\r\n   
+    }\r\n}\r\nexports.default = TS_TitlePanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfVGl0bGVQYW5lbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRTX1RpdGxlUGFuZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBNEM7QUFDNUMsNkNBQXNDO0FBQ3RDLDZDQUE2QztBQUM3Qyw2Q0FBb0Q7QUFFcEQsbURBQXVDO0FBQ3ZDLGlEQUFxRDtBQUNyRCw2Q0FBc0M7QUFDdEMsaURBQTBDO0FBRzFDLE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUFBaEU7O1FBWVksYUFBUSxHQUFhLEtBQUssQ0FBQztRQUVuQyxrQkFBa0I7UUFDRCxjQUFTLEdBQVksQ0FBQyxDQUFDO1FBRXhDLGVBQWU7UUFDUCxrQkFBYSxHQUFlLElBQUksQ0FBQztJQXFDN0MsQ0FBQztJQW5DRywwSUFBMEk7SUFDMUksaUJBQWlCO0lBRVQsS0FBSztRQUNULElBQUksQ0FBQyxTQUFTLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDcEMsZUFBZTtZQUNmLElBQUcsSUFBSSxDQUFDLFFBQVEsRUFBRTtnQkFDZCxJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQzthQUNwQztRQUNMLENBQUMsQ0FBQyxDQUFDO1FBQ0gsa0JBQWtCO1FBQ2xCLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxDQUFDO1FBQ3pCLGlCQUFpQjtRQUNqQixJQUFJLENBQUMsc0JBQXNCLEVBQUUsQ0FBQztRQUM5QixpQkFBaUI7UUFDakIsSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQyxDQUFDO0lBQ25FLENBQUM7SUFFRCwwSUFBMEk7SUFDMUksUUFBUTtJQUVBLGlCQUFpQjtRQUNyQixJQUFJLEtBQUssR0FBWSxJQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksU0FBQywyQkFBYSxHQUFJLElBQUksQ0FBQyxLQUFLLENBQUM7UUFDOUUsSUFBSSxDQUFDLE9BQU8sQ0FBQyxZQUFZLFNBQUMsMkJBQWEsR0FBSSxTQUFTLEdBQUcsSUFBSSxxQkFBTyxDQUFDLEtBQUssRUFBRSxLQUFLLENBQUMsQ0FBQztJQUNyRixDQUFDO0lBRU8sQ0FBRSxhQUFhO1FBQ25CLE1BQU0sSUFBSSw0QkFBYyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUN6QyxJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQztJQUN6QixDQUFDO0lBRU8sc0JBQXNCO1FBQzFCLElBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxHQUFHLG1CQUFTLENBQUMsVUFBVSxDQUFDLEdBQUcsQ0FBQyxpQkFBTyxDQUFDLFdBQVcsRUFBRSxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQzVGLENBQUM7Q0FFSjtBQXZERCxnQ0F1REMifQ==","assetPath":"Assets/_Main/Script/Canvas/TS_TitlePanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"titlePanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"[Default]\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"mainImg","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"offButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"offButtonTxt","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"TS_TitlePanel","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 019beecbb210b16257015d2caba44f3c
+  onlyWriteTrigger: 0

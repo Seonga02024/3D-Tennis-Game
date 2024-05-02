@@ -1,0 +1,7 @@
+{
+"State" : {"players" : {"map" : "Player"},"tennisBalls" : {"map" : "TennisBall"}},
+"Vector3" : {"x" : "number","y" : "number","z" : "number"},
+"Transform" : {"position" : "Vector3","rotation" : "Vector3"},
+"Player" : {"sessionId" : "string","zepetoUserId" : "string","transform" : "Transform","state" : "uint8","isHost" : "boolean","matchGameNum" : "number","currnetPlayerNum" : "number","pauseTime" : "number","isPause" : "boolean"},
+"TennisBall" : {"index" : "number","position" : "Vector3"}
+}

@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: 99088b9a4f34f5c45b55f3ebe419bb27
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass TS_SafeArea extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        // SafeArea Settings\r\n        let safeArea =
+    UnityEngine_1.Screen.safeArea;\r\n        let newAnchorMin = safeArea.position;\r\n       
+    let newAnchorMax = UnityEngine_1.Vector2.op_Addition(safeArea.position, safeArea.size);\r\n       
+    newAnchorMin.x /= UnityEngine_1.Screen.width;\r\n        newAnchorMax.x /= UnityEngine_1.Screen.width;\r\n       
+    newAnchorMin.y /= UnityEngine_1.Screen.height;\r\n        newAnchorMax.y /= UnityEngine_1.Screen.height;\r\n       
+    let rect = this.safeArea.GetComponent($typeof(UnityEngine_1.RectTransform));\r\n       
+    rect.anchorMin = newAnchorMin;\r\n        rect.anchorMax = newAnchorMax;\r\n   
+    }\r\n}\r\nexports.default = TS_SafeArea;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfU2FmZUFyZWEuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUU19TYWZlQXJlYS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUErRTtBQUMvRSxpREFBcUQ7QUFFckQsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtJQUkxRCxLQUFLO1FBQ0Qsb0JBQW9CO1FBQ3BCLElBQUksUUFBUSxHQUFTLG9CQUFNLENBQUMsUUFBUSxDQUFDO1FBQ3JDLElBQUksWUFBWSxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUM7UUFDckMsSUFBSSxZQUFZLEdBQUcscUJBQU8sQ0FBQyxXQUFXLENBQUMsUUFBUSxDQUFDLFFBQVEsRUFBRSxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDekUsWUFBWSxDQUFDLENBQUMsSUFBSSxvQkFBTSxDQUFDLEtBQUssQ0FBQztRQUMvQixZQUFZLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsS0FBSyxDQUFDO1FBQy9CLFlBQVksQ0FBQyxDQUFDLElBQUksb0JBQU0sQ0FBQyxNQUFNLENBQUM7UUFDaEMsWUFBWSxDQUFDLENBQUMsSUFBSSxvQkFBTSxDQUFDLE1BQU0sQ0FBQztRQUNoQyxJQUFJLElBQUksR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLFlBQVksU0FBQywyQkFBYSxFQUFHLENBQUM7UUFDdkQsSUFBSSxDQUFDLFNBQVMsR0FBRyxZQUFZLENBQUM7UUFDOUIsSUFBSSxDQUFDLFNBQVMsR0FBRyxZQUFZLENBQUM7SUFDbEMsQ0FBQztDQUVKO0FBbEJELDhCQWtCQyJ9","assetPath":"Assets/_Main/Script/Canvas/TS_SafeArea.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"safeArea","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"TS_SafeArea","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 070a237b12c9286922827b9a3e9c6f01
+  onlyWriteTrigger: 0

@@ -1,0 +1,53 @@
+fileFormatVersion: 2
+guid: ab019793cd1354e43812dd6bbe97b87c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_2 = require(\\\"UnityEngine\\\");\\r\\nconst UnityEngine_3 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Character_Controller_1 = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst TS_PlayerControllerManager_1
+    = require(\\\"./TS_PlayerControllerManager\\\");\\r\\nconst TS_ClientStarter_1
+    = require(\\\"../TS_ClientStarter\\\");\\r\\nclass TS_AttachObjectController
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        /* Timer */\\r\\n        this.waitForWait =
+    new UnityEngine_1.WaitForSeconds(3);\\r\\n    }\\r\\n    Start() {\\r\\n       
+    ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\\r\\n            this._localCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\\r\\n           
+    const animator = this._localCharacter.ZepetoAnimator;\\r\\n            const
+    bone1 = animator.GetBoneTransform(this.bodyBone1);\\r\\n            let rightT
+    = UnityEngine_2.Object.Instantiate(this.tennisRight, bone1);\\r\\n           
+    const bone2 = animator.GetBoneTransform(this.bodyBone2);\\r\\n            let
+    leftT = UnityEngine_2.Object.Instantiate(this.tennisLeft, bone2);\\r\\n           
+    this.StartCoroutine(this.SetPlayerTennisObj(TS_ClientStarter_1.default.GetInstance().player.sessionId,
+    rightT, leftT));\\r\\n        });\\r\\n        // \uB2E4\uB978 Player \uCD94\uAC00\\r\\n       
+    ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedPlayer.AddListener((sessionId)
+    => {\\r\\n            if (sessionId != TS_ClientStarter_1.default.GetInstance().player.sessionId)
+    {\\r\\n                const mPlayer = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.GetPlayer(sessionId).character;\\r\\n               
+    const animator = mPlayer.ZepetoAnimator;\\r\\n                const bone1 = animator.GetBoneTransform(this.bodyBone1);\\r\\n               
+    let rightT = UnityEngine_2.Object.Instantiate(this.tennisRight, bone1);\\r\\n               
+    const bone2 = animator.GetBoneTransform(this.bodyBone2);\\r\\n               
+    let leftT = UnityEngine_2.Object.Instantiate(this.tennisLeft, bone2);\\r\\n               
+    this.StartCoroutine(this.SetPlayerTennisObj(sessionId, rightT, leftT));\\r\\n           
+    }\\r\\n        });\\r\\n    }\\r\\n    *SetPlayerTennisObj(sessionId, rightT,
+    leftT) {\\r\\n        yield this.waitForWait;\\r\\n        TS_PlayerControllerManager_1.default.GetInstance().GetPlayerController(sessionId).setHandTennisObj(rightT,
+    leftT);\\r\\n    }\\r\\n}\\r\\nexports.default = TS_AttachObjectController;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfQXR0YWNoT2JqZWN0Q29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRTX0F0dGFjaE9iamVjdENvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBd0Q7QUFDeEQsNkNBQXFDO0FBQ3JDLDZDQUFtRTtBQUNuRSw2RUFBNkU7QUFDN0UsaURBQXFEO0FBQ3JELDZFQUFzRTtBQUN0RSwwREFBbUQ7QUFFbkQsTUFBcUIseUJBQTBCLFNBQVEscUNBQXFCO0lBQTVFOztRQVdJLFdBQVc7UUFDSCxnQkFBVyxHQUFvQixJQUFJLDRCQUFjLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFpQ2pFLENBQUM7SUEvQkcsS0FBSztRQUNELDJDQUFhLENBQUMsUUFBUSxDQUFDLGtCQUFrQixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDdkQsSUFBSSxDQUFDLGVBQWUsR0FBRywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQztZQUNqRixNQUFNLFFBQVEsR0FBYSxJQUFJLENBQUMsZUFBZSxDQUFDLGNBQWMsQ0FBQztZQUMvRCxNQUFNLEtBQUssR0FBYyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1lBQ25FLElBQUksTUFBTSxHQUFHLG9CQUFNLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxXQUFXLEVBQUUsS0FBSyxDQUFlLENBQUM7WUFDdkUsTUFBTSxLQUFLLEdBQWMsUUFBUSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztZQUNuRSxJQUFJLEtBQUssR0FBRyxvQkFBTSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxFQUFFLEtBQUssQ0FBZSxDQUFDO1lBQ3JFLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLDBCQUFnQixDQUFDLFdBQVcsRUFBRSxDQUFDLE1BQU0sQ0FBQyxTQUFTLEVBQUUsTUFBTSxFQUFFLEtBQUssQ0FBQyxDQUFDLENBQUM7UUFFakgsQ0FBQyxDQUFDLENBQUM7UUFDSCxlQUFlO1FBQ2YsMkNBQWEsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLFdBQVcsQ0FBQyxDQUFDLFNBQWdCLEVBQUUsRUFBRTtZQUNsRSxJQUFHLFNBQVMsSUFBSSwwQkFBZ0IsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxNQUFNLENBQUMsU0FBUyxFQUFDO2dCQUM1RCxNQUFNLE9BQU8sR0FBcUIsMkNBQWEsQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDLFNBQVMsQ0FBQyxDQUFDLFNBQVMsQ0FBQztnQkFDeEYsTUFBTSxRQUFRLEdBQWEsT0FBTyxDQUFDLGNBQWMsQ0FBQztnQkFDbEQsTUFBTSxLQUFLLEdBQWMsUUFBUSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztnQkFDbkUsSUFBSSxNQUFNLEdBQUcsb0JBQU0sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxLQUFLLENBQWUsQ0FBQztnQkFDdkUsTUFBTSxLQUFLLEdBQWMsUUFBUSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztnQkFDbkUsSUFBSSxLQUFLLEdBQUcsb0JBQU0sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFVBQVUsRUFBRSxLQUFLLENBQWUsQ0FBQztnQkFDckUsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsU0FBUyxFQUFFLE1BQU0sRUFBRSxLQUFLLENBQUMsQ0FBQyxDQUFDO2FBQzFFO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRU8sQ0FBRSxrQkFBa0IsQ0FBQyxTQUFrQixFQUFFLE1BQW1CLEVBQUUsS0FBa0I7UUFFcEYsTUFBTSxJQUFJLENBQUMsV0FBVyxDQUFDO1FBQ3ZCLG9DQUEwQixDQUFDLFdBQVcsRUFBRSxDQUFDLG1CQUFtQixDQUFDLFNBQVMsQ0FBQyxDQUFDLGdCQUFnQixDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsQ0FBQztJQUM1RyxDQUFDO0NBRUo7QUE3Q0QsNENBNkNDIn0=\",\"assetPath\":\"Assets/_Main/Script/Controller/TS_AttachObjectController.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"tennisRight\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"tennisLeft\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.AnimationModule\",\"name\":\"bodyBone1\",\"type\":\"UnityEngine.HumanBodyBones\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.AnimationModule\",\"name\":\"bodyBone2\",\"type\":\"UnityEngine.HumanBodyBones\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"TS_AttachObjectController\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: e00196c9d194a551456e7dc94fdce2ba
+  onlyWriteTrigger: 0

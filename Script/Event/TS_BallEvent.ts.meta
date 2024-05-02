@@ -1,0 +1,284 @@
+fileFormatVersion: 2
+guid: 9bb9de06fd534b043b9e4d94603061f8
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_2 = require(\\\"UnityEngine\\\");\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    TS_ClientStarter_1 = require(\\\"../TS_ClientStarter\\\");\\r\\nconst UnityEngine_3
+    = require(\\\"UnityEngine\\\");\\r\\nconst UnityEngine_4 = require(\\\"UnityEngine\\\");\\r\\nconst
+    TS_GameManager_1 = require(\\\"../System/TS_GameManager\\\");\\r\\nclass TS_BallEvent
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        this.raycastDistance = 100;\\r\\n        /*
+    Values */\\r\\n        this.isRoundStart = false; // \uB77C\uC6B4\uB4DC\uAC00
+    \uC2DC\uC791\uD588\uB294\uC9C0\\r\\n        this.targetPos = new UnityEngine_1.Vector3(0,
+    0, 0); // used not host\\r\\n        this.isSendData = false; // check count
+    score\\r\\n        this.isResetting = false; // is resetting\\r\\n        this.isSubMiss
+    = false; // is sub miss\\r\\n        /* Test */\\r\\n        this.testRobotBall
+    = [new UnityEngine_1.Vector3(0, 0, 7),\\r\\n            new UnityEngine_1.Vector3(4,
+    0, 7),\\r\\n            new UnityEngine_1.Vector3(-4, 0, 7)];\\r\\n        this.isTestRobotHard
+    = false;\\r\\n        /* Coroutines */\\r\\n        this.subCheckCoroutine =
+    null;\\r\\n        this.hitCoroutine = null;\\r\\n        this.resetCoroutine
+    = null;\\r\\n        this.robotCoroutine = null;\\r\\n        /* Timers */\\r\\n       
+    this.waitForSubCheck = new UnityEngine_1.WaitForSeconds(1);\\r\\n        this.waitForMoment
+    = new UnityEngine_1.WaitForSeconds(1);\\r\\n        this.waitForRobotShoot =
+    new UnityEngine_1.WaitForSeconds(4);\\r\\n        /* Rule */\\r\\n        this.colliderGroundTime
+    = 0; // \uACF5\uC774 \uBC14\uB2E5\uC5D0 \uB2FF\uC778 \uC2DC\uAC04\\r\\n       
+    this.groundHitStack = 0; // \uCF54\uD2B8\uC5D0 \uACF5 \uB2FF\uC740 \uC218\\r\\n       
+    this.currentTurn = 2; // \uD604\uC7AC \uACF5 \uCE5C \uC120\uC218\uC758 \uBC88\uD638\\r\\n       
+    this.startTurn = 1; // \uD574\uB2F9 \uB77C\uC6B4\uB4DC\uC5D0\uC11C \uC2DC\uC791\uD55C
+    \uC120\uC218\uC758 \uBC88\uD638\\r\\n        /* Stat */\\r\\n        this.speed
+    = 0.3; // \uC18D\uB3C4 - \uC9C1\uC811 \uC9C0\uC815 \uAC00\uB2A5\\r\\n       
+    this.angle = 45; // \uAC01\uB3C4 - \uC2E4\uD589 \uC911 \uC790\uB3D9 \uACC4\uC0B0\\r\\n   
+    }\\r\\n    ///////////////////////////////////////////////////////////////////////////////////\\r\\n   
+    //////////// start\\r\\n    // all\\r\\n    startGame() {\\r\\n        this.currentTurn
+    = 2;\\r\\n        this.startTurn = 1;\\r\\n        this.trailRender.enabled =
+    false;\\r\\n        if (TS_ClientStarter_1.default.GetInstance().player != null
+    && TS_ClientStarter_1.default.GetInstance().player.isHost) {\\r\\n           
+    this.ChangeBallPosHost();\\r\\n        }\\r\\n    }\\r\\n    //////////////////////////////////////////////////////////////////////\\r\\n   
+    /// finish\\r\\n    // ResetBallTS\\r\\n    ResetBallTS() {\\r\\n        console.log(`ResetBallTS`);\\r\\n       
+    this.currentTurn = 2;\\r\\n        this.startTurn = 1;\\r\\n        this.isRoundStart
+    = false;\\r\\n        this.targetPos = new UnityEngine_1.Vector3(0, 0, 0);\\r\\n       
+    this.isSendData = false;\\r\\n        this.isResetting = false;\\r\\n       
+    this.isSubMiss = false;\\r\\n        this.colliderGroundTime = 0;\\r\\n       
+    this.groundHitStack = 0;\\r\\n        if (this.hitCoroutine != null) {\\r\\n           
+    this.StopCoroutine(this.hitCoroutine);\\r\\n        }\\r\\n        if (this.resetCoroutine
+    != null) {\\r\\n            this.StopCoroutine(this.resetCoroutine);\\r\\n       
+    }\\r\\n    }\\r\\n    //////////////////////////////////////////////////////////////////////\\r\\n   
+    // not host\\r\\n    ChangeBallPosNoHost(pos) {\\r\\n        let distance = UnityEngine_1.Vector3.Distance(pos,
+    this.gameObject.transform.position);\\r\\n        if (distance == 0)\\r\\n           
+    return;\\r\\n        //console.log(`ChangeBallPosNoHost ${Vector3.Distance(pos,
+    this.gameObject.transform.position)}`);\\r\\n        this.targetPos = pos;\\r\\n   
+    }\\r\\n    // host\\r\\n    // call TS_GameManager\\r\\n    playerHitBall(pos,
+    isFirstPlayer) {\\r\\n        // stop\\r\\n        if (this.subCheckCoroutine
+    != null) {\\r\\n            this.StopCoroutine(this.subCheckCoroutine);\\r\\n       
+    }\\r\\n        //console.log(`playerHitBall`);\\r\\n        if (this.gameObject.activeSelf
+    == false)\\r\\n            return;\\r\\n        // change turn\\r\\n        if
+    (this.currentTurn == 1)\\r\\n            this.currentTurn = 2;\\r\\n        else\\r\\n           
+    this.currentTurn = 1;\\r\\n        // setting shoot pos\\r\\n        this.pos
+    = new UnityEngine_1.Vector3(pos.x, pos.y + 0.5, pos.z);\\r\\n        // reset\\r\\n       
+    this.groundHitStack = 0;\\r\\n        this.colliderGroundTime = 0;\\r\\n       
+    this.isSubMiss = false;\\r\\n        // shoot\\r\\n        if (this.hitCoroutine
+    != null) {\\r\\n            this.StopCoroutine(this.hitCoroutine);\\r\\n       
+    }\\r\\n        this.hitCoroutine = this.StartCoroutine(this.ParabolaShoot(isFirstPlayer));\\r\\n   
+    }\\r\\n    ///////////////////////////////////////////////////////////////////////////////////\\r\\n   
+    //// start\\r\\n    Update() {\\r\\n        if (TS_ClientStarter_1.default.GetInstance().isGameStart)
+    {\\r\\n            // is not host -> update ball pos\\r\\n            if (TS_ClientStarter_1.default.GetInstance().player.isHost
+    == false) {\\r\\n                if (this.isResetting) {\\r\\n                   
+    this.gameObject.transform.position = this.targetPos;\\r\\n                }\\r\\n               
+    else {\\r\\n                    this.gameObject.transform.position = UnityEngine_1.Vector3.Lerp(this.gameObject.transform.position,
+    this.targetPos, UnityEngine_1.Time.deltaTime * 10);\\r\\n                }\\r\\n           
+    }\\r\\n            // if round start, on trailRender and drop ball obj\\r\\n           
+    if (TS_GameManager_1.default.GetInstance().isRoundStart) {\\r\\n               
+    // \uB77C\uC6B4\uB4DC \uC2DC\uC791\uD558\uBA74 (\uC989, \uACF5\uC774 \uB0A0\uB77C\uAC00\uBA74)
+    \uD2B8\uB808\uC77C \uCF1C\uC8FC\uAE30\\r\\n                if (this.trailRender.enabled
+    == false)\\r\\n                    this.trailRender.enabled = true;\\r\\n               
+    let hit = $ref();\\r\\n                let ray = new UnityEngine_1.Ray(this.gameObject.transform.position,
+    UnityEngine_1.Vector3.down);\\r\\n                if (UnityEngine_1.Physics.Raycast(ray,
+    hit, this.raycastDistance)) {\\r\\n                    let hitInfo = $unref(hit);\\r\\n                   
+    let collPos = hitInfo.point;\\r\\n                    TS_GameManager_1.default.GetInstance().ChangeCurrentDropBallObj(collPos);\\r\\n               
+    }\\r\\n            }\\r\\n            // if host and subing, change ball pos
+    -> current sub player front\\r\\n            if (TS_ClientStarter_1.default.GetInstance().player.isHost)
+    {\\r\\n                //console.log(`ball Update ${TS_GameManager.GetInstance().isRoundStart}
+    ${TS_GameManager.GetInstance().isWaitChange}`);\\r\\n                if (TS_GameManager_1.default.GetInstance().isRoundStart
+    == false && TS_GameManager_1.default.GetInstance().isWaitChange == false) {\\r\\n                   
+    if (this.startTurn == 1) {\\r\\n                        let playerPos = TS_ClientStarter_1.default.GetInstance().GetPlayer1ZepetoCharacter().gameObject.transform.position;\\r\\n                       
+    this.gameObject.transform.position = new UnityEngine_1.Vector3(playerPos.x, playerPos.y
+    + 1, playerPos.z - 1);\\r\\n                    }\\r\\n                    else
+    {\\r\\n                        let playerPos = TS_ClientStarter_1.default.GetInstance().GetPlayer2ZepetoCharacter().gameObject.transform.position;\\r\\n                       
+    this.gameObject.transform.position = new UnityEngine_1.Vector3(playerPos.x, playerPos.y
+    + 1, playerPos.z + 1);\\r\\n                    }\\r\\n                }\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    *robotShoot(randomPower) {\\r\\n       
+    yield this.waitForRobotShoot;\\r\\n        if (this.isTestRobotHard) {\\r\\n           
+    TS_ClientStarter_1.default.GetInstance().SendHitTrigger(this.testRobotBall[randomPower
+    - 1], true);\\r\\n        }\\r\\n        else {\\r\\n            TS_ClientStarter_1.default.GetInstance().SendHitTrigger(this.testRobotBall[0],
+    true);\\r\\n        }\\r\\n    }\\r\\n    *ParabolaShoot(isFirstPlayer) {\\r\\n       
+    //console.log(`playerHitBall ParabolaShoot`);\\r\\n        this.transform.LookAt(this.pos);\\r\\n       
+    let direction = this.transform.forward;\\r\\n        this.rigid.useGravity =
+    false;\\r\\n        this.rigid.isKinematic = true;\\r\\n        this.angle =
+    UnityEngine_3.Random.Range(20, 30);\\r\\n        let target_dis = UnityEngine_1.Vector3.Distance(this.gameObject.transform.position,
+    this.pos);\\r\\n        let velocity = target_dis / (UnityEngine_4.Mathf.Sin(2
+    * this.angle * UnityEngine_4.Mathf.Deg2Rad) / 9.8) * this.speed;\\r\\n       
+    let Vx = UnityEngine_4.Mathf.Sqrt(velocity) * UnityEngine_4.Mathf.Cos(this.angle
+    * UnityEngine_4.Mathf.Deg2Rad);\\r\\n        let Vy = UnityEngine_4.Mathf.Sqrt(velocity)
+    * UnityEngine_4.Mathf.Sin(this.angle * UnityEngine_4.Mathf.Deg2Rad);\\r\\n       
+    let flightDuration = (target_dis / Vx) * this.speed;\\r\\n        let dir = new
+    UnityEngine_1.Vector3(this.pos.x - this.gameObject.transform.position.x, this.pos.y
+    - this.gameObject.transform.position.y, this.pos.z - this.gameObject.transform.position.z);\\r\\n       
+    this.gameObject.transform.rotation = UnityEngine_1.Quaternion.LookRotation(dir);\\r\\n       
+    let time = 0;\\r\\n        while (time < flightDuration) {\\r\\n            this.gameObject.transform.Translate(0,
+    (Vy - (9.8 * time)) * UnityEngine_1.Time.deltaTime, Vx * UnityEngine_1.Time.deltaTime);\\r\\n           
+    time += (UnityEngine_1.Time.deltaTime * this.speed);\\r\\n            yield null;\\r\\n       
+    }\\r\\n        this.rigid.useGravity = true;\\r\\n        this.rigid.isKinematic
+    = false;\\r\\n        if (isFirstPlayer == 2) {\\r\\n            this.rigid.AddForce(UnityEngine_1.Vector3.op_Multiply(new
+    UnityEngine_1.Vector3(direction.x, -1, direction.z), 6), UnityEngine_1.ForceMode.Impulse);\\r\\n       
+    }\\r\\n        else if (isFirstPlayer == 1) {\\r\\n            this.rigid.AddForce(UnityEngine_1.Vector3.op_Multiply(new
+    UnityEngine_1.Vector3(direction.x, -1, direction.z), 6), UnityEngine_1.ForceMode.Impulse);\\r\\n       
+    }\\r\\n        else {\\r\\n            this.rigid.AddForce(UnityEngine_1.Vector3.op_Multiply(new
+    UnityEngine_1.Vector3(direction.x, -1, direction.z), 6), UnityEngine_1.ForceMode.Impulse);\\r\\n       
+    }\\r\\n        //console.log(`playerHitBall ParabolaShoot end`);\\r\\n    }\\r\\n   
+    CheckSubFalse() {\\r\\n        if (this.subCheckCoroutine != null) {\\r\\n           
+    this.StopCoroutine(this.subCheckCoroutine);\\r\\n        }\\r\\n        this.subCheckCoroutine
+    = this.StartCoroutine(this.CheckSubFalseAndOut());\\r\\n    }\\r\\n    *CheckSubFalseAndOut()
+    {\\r\\n        yield this.waitForSubCheck;\\r\\n        // \uACF5\uC774 \uB0A0\uC544\uAC08
+    \uB3D9\uC548 \uC544\uBB34 \uBC29\uD574\uB3C4 \uC5C6\uC5C8\uB2E4\uBA74, \uC11C\uBE0C\uC778\uC9C0
+    \uD655\uC778\uD574\uC11C \uC81C\uB300\uB85C \uCCE4\uB294\uC9C0 \uD655\uC778\\r\\n       
+    if (TS_GameManager_1.default.GetInstance().isSub && this.isSubMiss == false)
+    {\\r\\n            // sub false\\r\\n            if (TS_GameManager_1.default.GetInstance().isSubSuccess
+    == false) {\\r\\n                console.log(`sub false ${this.startTurn}`);\\r\\n               
+    this.currentTurn = this.startTurn;\\r\\n                this.roundOverResetAndmyPlayerGetScore(false);\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    ///////////////////////////////////////////////////////////////\\r\\n   
+    // count down over -> get score no current turn player\\r\\n    CheckTimeOver()
+    {\\r\\n        if (TS_ClientStarter_1.default.GetInstance().player.isHost ==
+    false)\\r\\n            return;\\r\\n        console.log(`time over lose ${this.startTurn}`);\\r\\n       
+    this.currentTurn = this.startTurn;\\r\\n        this.roundOverResetAndmyPlayerGetScore(false);\\r\\n   
+    }\\r\\n    // host\\r\\n    // check error true -> round reset\\r\\n    CheckError()
+    {\\r\\n        // no count round and score\\r\\n        console.log(`CheckError`);\\r\\n       
+    TS_ClientStarter_1.default.GetInstance().SendGetScorePlayerData(3);\\r\\n   
+    }\\r\\n    ///////////////////////////////////////////////////////////////\\r\\n   
+    /// finish and reset\\r\\n    ResetRound() {\\r\\n        this.colliderGroundTime
+    = 0;\\r\\n        this.isSendData = false;\\r\\n        // change start turn\\r\\n       
+    if (this.startTurn == 1) {\\r\\n            //console.log(`ResetBall this.startTurn
+    1`);\\r\\n            this.startTurn = 2;\\r\\n            this.currentTurn =
+    1;\\r\\n        }\\r\\n        else {\\r\\n            //console.log(`ResetBall
+    this.startTurn 2`);\\r\\n            this.startTurn = 1;\\r\\n            this.currentTurn
+    = 2;\\r\\n        }\\r\\n        if (this.gameObject.activeSelf == false)\\r\\n           
+    return;\\r\\n        if (this.resetCoroutine != null) {\\r\\n            this.StopCoroutine(this.resetCoroutine);\\r\\n       
+    }\\r\\n        this.resetCoroutine = this.StartCoroutine(this.ResetBallCoroutine());\\r\\n   
+    }\\r\\n    // all\\r\\n    FinishResetting() {\\r\\n        this.isResetting
+    = false;\\r\\n        if (this.startTurn == 1) {\\r\\n            TS_GameManager_1.default.GetInstance().SettingSubObj(true,
+    true);\\r\\n        }\\r\\n        else {\\r\\n            TS_GameManager_1.default.GetInstance().SettingSubObj(true,
+    false);\\r\\n        }\\r\\n    }\\r\\n    // all -1\uCD08 \uB4A4 \uACF5 \uC704\uCE58
+    \uBC14\uB01C\\r\\n    *ResetBallCoroutine() {\\r\\n        yield this.waitForMoment;\\r\\n       
+    this.isResetting = true;\\r\\n        this.trailRender.enabled = false;\\r\\n       
+    if (TS_ClientStarter_1.default.GetInstance().player.isHost == false)\\r\\n           
+    return;\\r\\n        if (this.hitCoroutine != null) {\\r\\n            this.StopCoroutine(this.hitCoroutine);\\r\\n       
+    }\\r\\n        this.ChangeBallPosHost();\\r\\n    }\\r\\n    // host\\r\\n   
+    ChangeBallPosHost() {\\r\\n        //console.log(`ChangeBallPosHost ${this.startTurn}`);\\r\\n       
+    //this.gameObject.SetActive(false);\\r\\n        this.ResetForce();\\r\\n       
+    this.startPos1 = TS_GameManager_1.default.GetInstance().startPos1;\\r\\n       
+    this.startPos2 = TS_GameManager_1.default.GetInstance().startPos2;\\r\\n       
+    if (this.startTurn == 1) {\\r\\n            this.gameObject.transform.position
+    = this.startPos1.position;\\r\\n        }\\r\\n        else {\\r\\n           
+    this.gameObject.transform.position = this.startPos2.position;\\r\\n        }\\r\\n       
+    this.ResetForce();\\r\\n    }\\r\\n    ResetForce() {\\r\\n        this.rigid.useGravity
+    = false;\\r\\n        this.rigid.isKinematic = true;\\r\\n        this.rigid.velocity
+    = UnityEngine_1.Vector3.zero;\\r\\n        this.rigid.angularVelocity = UnityEngine_1.Vector3.zero;\\r\\n   
+    }\\r\\n    ///////////////////////////////////////////////////////////////////////////////////\\r\\n   
+    // host\\r\\n    roundOverResetAndmyPlayerGetScore(isGetScoreMyPlayer) {\\r\\n       
+    if (TS_GameManager_1.default.GetInstance().isRoundStart == false)\\r\\n           
+    return;\\r\\n        if (TS_ClientStarter_1.default.GetInstance().player.isHost
+    == false)\\r\\n            return;\\r\\n        if (this.isSendData)\\r\\n           
+    return;\\r\\n        if (this.isSubMiss)\\r\\n            return;\\r\\n       
+    console.log(`roundOverResetAndmyPlayerGetScore ${isGetScoreMyPlayer} ${this.currentTurn}`);\\r\\n       
+    if (isGetScoreMyPlayer) {\\r\\n            TS_ClientStarter_1.default.GetInstance().SendGetScorePlayerData(this.currentTurn);\\r\\n       
+    }\\r\\n        else {\\r\\n            TS_ClientStarter_1.default.GetInstance().SendGetScorePlayerData(this.changeTurn(this.currentTurn));\\r\\n       
+    }\\r\\n        this.isSendData = true;\\r\\n    }\\r\\n    // host\\r\\n    changeTurn(num)
+    {\\r\\n        if (num == 1)\\r\\n            return 2;\\r\\n        if (num
+    == 2)\\r\\n            return 1;\\r\\n    }\\r\\n    // call collider net\\r\\n   
+    SubMiss() {\\r\\n        //console.log(`SubMiss`);\\r\\n        TS_GameManager_1.default.GetInstance().ChangeSuv2();
+    // \uB450 \uBC88\uC9F8 \uC11C\uBE0C \uC0C1\uD0DC\uB85C \uBC14\uAFD4\uC8FC\uAE30\\r\\n       
+    if (this.hitCoroutine != null) {\\r\\n            this.StopCoroutine(this.hitCoroutine);\\r\\n       
+    } // \uB0A0\uC544\uAC00\uB294 \uCF54\uB8E8\uD2F4 \uBA48\uCD94\uAE30\\r\\n       
+    this.ResetForce(); // \uACF5 \uD798 \uAC12 \uC5C6\uC560\uAE30\\r\\n        //
+    \uD604\uC7AC \uD134\uC5D0 \uB9DE\uAC8C \uB2E4\uC2DC \uC11C\uBE0C \uC624\uBE0C\uC81D\uD2B8
+    \uD45C\uC2DC\uD574\uC8FC\uAE30\\r\\n        if (this.startTurn == 1) {\\r\\n           
+    TS_GameManager_1.default.GetInstance().SettingSubObj(true, true);\\r\\n       
+    }\\r\\n        else {\\r\\n            TS_GameManager_1.default.GetInstance().SettingSubObj(true,
+    false);\\r\\n        }\\r\\n    }\\r\\n    ///////////////////////////////////////////////////////////////////////////////////\\r\\n   
+    /////////// \\r\\n    OnTriggerEnter(coll) {\\r\\n        if (TS_GameManager_1.default.GetInstance().isRoundStart
+    == false)\\r\\n            return;\\r\\n        if (coll.CompareTag(\\\"Wall\\\"))
+    {\\r\\n            if (this.groundHitStack == 1) {\\r\\n                console.log(`OnTriggerEnter
+    Wall lose your score`);\\r\\n                // \uC0C1\uB300\uBC29 \uC2E4\uC810\\r\\n               
+    this.roundOverResetAndmyPlayerGetScore(true);\\r\\n            }\\r\\n           
+    else {\\r\\n                console.log(`OnTriggerEnter Wall lose my score`);\\r\\n               
+    // \uC790\uC2E0\uC758 \uC2E4\uC810\\r\\n                this.roundOverResetAndmyPlayerGetScore(false);\\r\\n           
+    }\\r\\n        }\\r\\n        if (coll.CompareTag(\\\"TennisGround1\\\") || coll.CompareTag(\\\"TennisGround2\\\"))
+    {\\r\\n            this.CheckSubFalse();\\r\\n            if (coll.CompareTag(\\\"TennisGround1\\\"))
+    {\\r\\n                if (this.currentTurn == 1) {\\r\\n                   
+    console.log(`OnTriggerEnter TennisGround1 lose my score`);\\r\\n                   
+    // \uCCE4\uB294\uB370 \uC790\uAE30 \uB545\uC5D0 \uB2FF\uC544\uC11C \uC544\uC6C3\\r\\n                   
+    // \uC790\uC2E0\uC758 \uC2E4\uC810\\r\\n                    this.roundOverResetAndmyPlayerGetScore(false);\\r\\n               
+    }\\r\\n                else {\\r\\n                    // \uC0C1\uB300\uBC29
+    \uCF54\uD2B8\uC5D0 \uB2FF\uC74C\\r\\n                    this.groundHitStack
+    += 1;\\r\\n                    //console.log(`OnTriggerEnter this.groundHitStack
+    += 1`);\\r\\n                    if (this.groundHitStack >= 2) {\\r\\n                       
+    console.log(`OnTriggerEnter TennisGround1 lose your score`);\\r\\n                       
+    // \uC0C1\uB300\uBC29 \uC2E4\uC810\\r\\n                        this.roundOverResetAndmyPlayerGetScore(true);\\r\\n                   
+    }\\r\\n                }\\r\\n            }\\r\\n            if (coll.CompareTag(\\\"TennisGround2\\\"))
+    {\\r\\n                if (this.currentTurn == 2) {\\r\\n                   
+    // \uCCE4\uB294\uB370 \uC790\uAE30 \uB545\uC5D0 \uB2FF\uC544\uC11C \uC544\uC6C3\\r\\n                   
+    // \uC790\uC2E0\uC758 \uC2E4\uC810\\r\\n                    this.roundOverResetAndmyPlayerGetScore(false);\\r\\n                   
+    console.log(`OnTriggerEnter TennisGround2 lose my score`);\\r\\n               
+    }\\r\\n                else {\\r\\n                    // \uC0C1\uB300\uBC29
+    \uCF54\uD2B8\uC5D0 \uB2FF\uC74C\\r\\n                    this.groundHitStack
+    += 1;\\r\\n                    //console.log(`OnTriggerEnter this.groundHitStack
+    += 1`);\\r\\n                    if (this.groundHitStack >= 2) {\\r\\n                       
+    // \uC0C1\uB300\uBC29 \uC2E4\uC810\\r\\n                        this.roundOverResetAndmyPlayerGetScore(true);\\r\\n                       
+    console.log(`OnTriggerEnter Ground lose your score`);\\r\\n                   
+    }\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        if (coll.CompareTag(\\\"Ground\\\"))
+    {\\r\\n            if (this.groundHitStack == 1) {\\r\\n                // \uC0C1\uB300\uBC29
+    \uC2E4\uC810\\r\\n                this.roundOverResetAndmyPlayerGetScore(true);\\r\\n               
+    console.log(`OnTriggerEnter Ground lose your score`);\\r\\n            }\\r\\n           
+    else {\\r\\n                // \uC790\uC2E0\uC758 \uC2E4\uC810\\r\\n               
+    this.roundOverResetAndmyPlayerGetScore(false);\\r\\n                console.log(`OnTriggerEnter
+    Ground lose my score`);\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n   
+    OnCollisionEnter(coll) {\\r\\n        if (TS_GameManager_1.default.GetInstance().isRoundStart
+    == false)\\r\\n            return;\\r\\n        if (coll.gameObject.CompareTag(\\\"Net\\\"))
+    {\\r\\n            if (TS_GameManager_1.default.GetInstance().isSub == true &&
+    TS_GameManager_1.default.GetInstance().isSub2 == false) {\\r\\n               
+    // \uB124\uD2B8 \uB9DE\uC544\uC11C \uC11C\uBE0C \uBBF8\uC2A4\uC77C \uACBD\uC6B0
+    (1\uD68C\uCC28)\\r\\n                console.log(`==============================
+    Sub net`);\\r\\n                TS_ClientStarter_1.default.GetInstance().SendSubMiss();\\r\\n               
+    // \uD638\uC2A4\uD2B8\uB9CC \uD0C0\uC774\uBC0D \uB54C\uBB38\uC5D0 \uBE68\uB9AC
+    \uCC98\uB9AC\uD574\uC8FC\uAE30\\r\\n                if (TS_ClientStarter_1.default.GetInstance().player.isHost)
+    {\\r\\n                    this.isSubMiss = true;\\r\\n                }\\r\\n           
+    }\\r\\n            else {\\r\\n                // \uC790\uC2E0\uC758 \uC2E4\uC810\\r\\n               
+    this.roundOverResetAndmyPlayerGetScore(false);\\r\\n                console.log(`OnCollisionEnter
+    Net lose my score`);\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n    OnTriggerStay(coll)
+    {\\r\\n        if (TS_GameManager_1.default.GetInstance().isRoundStart == false)\\r\\n           
+    return;\\r\\n        if (coll.CompareTag(\\\"Ground\\\")) {\\r\\n           
+    this.colliderGroundTime += UnityEngine_1.Time.deltaTime;\\r\\n            if
+    (this.colliderGroundTime > 1) {\\r\\n                if (this.groundHitStack
+    == 1) {\\r\\n                    // \uC0C1\uB300\uBC29 \uC2E4\uC810\\r\\n                   
+    this.roundOverResetAndmyPlayerGetScore(true);\\r\\n                    console.log(`OnTriggerStay
+    Ground lose your score`);\\r\\n                }\\r\\n                else {\\r\\n                   
+    // \uC790\uC2E0\uC758 \uC2E4\uC810\\r\\n                    this.roundOverResetAndmyPlayerGetScore(false);\\r\\n                   
+    console.log(`OnTriggerStay Ground lose my score`);\\r\\n                }\\r\\n           
+    }\\r\\n        }\\r\\n        if (coll.CompareTag(\\\"TennisGround1\\\")) {\\r\\n           
+    this.colliderGroundTime += UnityEngine_1.Time.deltaTime;\\r\\n            if
+    (this.colliderGroundTime > 1) {\\r\\n                if (this.currentTurn ==
+    1) {\\r\\n                    // \uC790\uC2E0\uC758 \uC2E4\uC810\\r\\n                   
+    console.log(`OnTriggerStay TennisGround1 lose my score`);\\r\\n                   
+    this.roundOverResetAndmyPlayerGetScore(false);\\r\\n                }\\r\\n               
+    else {\\r\\n                    // \uC0C1\uB300\uBC29 \uC2E4\uC810\\r\\n                   
+    this.roundOverResetAndmyPlayerGetScore(true);\\r\\n                    console.log(`OnTriggerStay
+    TennisGround1 lose your score`);\\r\\n                }\\r\\n            }\\r\\n       
+    }\\r\\n        if (coll.CompareTag(\\\"TennisGround2\\\")) {\\r\\n           
+    this.colliderGroundTime += UnityEngine_1.Time.deltaTime;\\r\\n            if
+    (this.colliderGroundTime > 1) {\\r\\n                if (this.currentTurn ==
+    2) {\\r\\n                    // \uC790\uC2E0\uC758 \uC2E4\uC810\\r\\n                   
+    this.roundOverResetAndmyPlayerGetScore(false);\\r\\n                    console.log(`OnTriggerStay
+    TennisGround2 lose my score`);\\r\\n                }\\r\\n                else
+    {\\r\\n                    // \uC0C1\uB300\uBC29 \uC2E4\uC810\\r\\n                   
+    this.roundOverResetAndmyPlayerGetScore(true);\\r\\n                    console.log(`OnTriggerStay
+    Ground lose your score`);\\r\\n                }\\r\\n            }\\r\\n       
+    }\\r\\n    }\\r\\n}\\r\\nexports.default = TS_BallEvent;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfQmFsbEV2ZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfQmFsbEV2ZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTJKO0FBQzNKLDZDQUE2RDtBQUM3RCxpREFBcUQ7QUFDckQsMERBQW1EO0FBQ25ELDZDQUFxQztBQUNyQyw2Q0FBb0M7QUFDcEMsNkRBQXNEO0FBRXRELE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFBL0Q7O1FBV1ksb0JBQWUsR0FBWSxHQUFHLENBQUM7UUFFdkMsWUFBWTtRQUNKLGlCQUFZLEdBQWEsS0FBSyxDQUFDLENBQUMsYUFBYTtRQUM3QyxjQUFTLEdBQWEsSUFBSSxxQkFBTyxDQUFDLENBQUMsRUFBQyxDQUFDLEVBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxnQkFBZ0I7UUFDMUQsZUFBVSxHQUFhLEtBQUssQ0FBQyxDQUFDLG9CQUFvQjtRQUNsRCxnQkFBVyxHQUFhLEtBQUssQ0FBQyxDQUFDLGVBQWU7UUFDOUMsY0FBUyxHQUFHLEtBQUssQ0FBQyxDQUFDLGNBQWM7UUFFekMsVUFBVTtRQUNGLGtCQUFhLEdBQWUsQ0FBRSxJQUFJLHFCQUFPLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUU7WUFDdkIsSUFBSSxxQkFBTyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFFO1lBQ3JCLElBQUkscUJBQU8sQ0FBQyxDQUFDLENBQUMsRUFBRyxDQUFDLEVBQUUsQ0FBQyxDQUFFLENBQUMsQ0FBQztRQUNyQyxvQkFBZSxHQUFhLEtBQUssQ0FBQztRQUUxRCxnQkFBZ0I7UUFDUixzQkFBaUIsR0FBZSxJQUFJLENBQUM7UUFDckMsaUJBQVksR0FBZSxJQUFJLENBQUM7UUFDaEMsbUJBQWMsR0FBZSxJQUFJLENBQUM7UUFDbEMsbUJBQWMsR0FBZSxJQUFJLENBQUM7UUFFMUMsWUFBWTtRQUNKLG9CQUFlLEdBQW9CLElBQUksNEJBQWMsQ0FBQyxDQUFDLENBQUMsQ0FB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\",\"assetPath\":\"Assets/_Main/Script/Event/TS_BallEvent.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.PhysicsModule\",\"name\":\"rigid\",\"type\":\"UnityEngine.Rigidbody\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"Header\",\"args\":[\"\\\"Default\\\"\"]},{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"trailRender\",\"type\":\"UnityEngine.TrailRenderer\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"TS_BallEvent\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: eda7d95bf1734d2e04cc6986db7271cc
+  onlyWriteTrigger: 0

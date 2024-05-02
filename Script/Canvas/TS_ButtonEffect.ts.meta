@@ -1,0 +1,51 @@
+fileFormatVersion: 2
+guid: 97e736ea4d8e60c4ba8732b7d4cf04a6
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass TS_ButtonEffect extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    this.onClickChangeScale = true;\r\n        this.onClickChangeColor = true;\r\n       
+    this.isUseCustomColor = false;\r\n        this.customColor = new UnityEngine_1.Color(200
+    / 255, 200 / 255, 200 / 255, 255 / 255);\r\n        /* Const Values */\r\n       
+    this.NORMAL_COLOR = new UnityEngine_1.Color(255 / 255, 255 / 255, 255 / 255,
+    255 / 255);\r\n        this.PRESSED_COLOR = new UnityEngine_1.Color(229 / 255,
+    51 / 255, 137 / 255, 255 / 255);\r\n        this.NORMAL_SCALE = UnityEngine_1.Vector3.one;\r\n       
+    this.PRESSED_SCALE = new UnityEngine_1.Vector3(1.15, 1.15, 1.15);\r\n    }\r\n   
+    Awake() {\r\n        this.zepetoScreenBtn.OnPointDownEvent.AddListener(() =>
+    {\r\n            if (this.onClickChangeColor == true) {\r\n                if
+    (this.isUseCustomColor == false) {\r\n                    this.btnImages.forEach(btnImage
+    => {\r\n                        btnImage.color = this.PRESSED_COLOR;\r\n                   
+    });\r\n                }\r\n                else {\r\n                    this.btnImages.forEach(btnImage
+    => {\r\n                        btnImage.color = this.customColor;\r\n                   
+    });\r\n                }\r\n            }\r\n            if (this.onClickChangeScale
+    == true) {\r\n                this.btnImages.forEach(btnImage => {\r\n                   
+    btnImage.rectTransform.localScale = this.PRESSED_SCALE;\r\n                });\r\n           
+    }\r\n        });\r\n        this.zepetoScreenBtn.OnPointUpEvent.AddListener(()
+    => {\r\n            if (this.onClickChangeColor == true) {\r\n               
+    this.btnImages.forEach(btnImage => {\r\n                    btnImage.color =
+    this.NORMAL_COLOR;\r\n                });\r\n            }\r\n            if
+    (this.onClickChangeScale == true) {\r\n                this.btnImages.forEach(btnImage
+    => {\r\n                    btnImage.rectTransform.localScale = this.NORMAL_SCALE;\r\n               
+    });\r\n            }\r\n        });\r\n    }\r\n}\r\nexports.default = TS_ButtonEffect;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfQnV0dG9uRWZmZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfQnV0dG9uRWZmZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTZDO0FBRzdDLGlEQUFxRDtBQUVyRCxNQUFxQixlQUFnQixTQUFRLHFDQUFxQjtJQUFsRTs7UUFJWSx1QkFBa0IsR0FBYSxJQUFJLENBQUM7UUFFcEMsdUJBQWtCLEdBQWEsSUFBSSxDQUFDO1FBUXBDLHFCQUFnQixHQUFhLEtBQUssQ0FBQztRQUVuQyxnQkFBVyxHQUFXLElBQUksbUJBQUssQ0FBQyxHQUFHLEdBQUcsR0FBRyxFQUFFLEdBQUcsR0FBRyxHQUFHLEVBQUUsR0FBRyxHQUFHLEdBQUcsRUFBRSxHQUFHLEdBQUcsR0FBRyxDQUFDLENBQUM7UUFFcEYsa0JBQWtCO1FBQ0QsaUJBQVksR0FBVyxJQUFJLG1CQUFLLENBQUMsR0FBRyxHQUFHLEdBQUcsRUFBRSxHQUFHLEdBQUcsR0FBRyxFQUFFLEdBQUcsR0FBRyxHQUFHLEVBQUUsR0FBRyxHQUFHLEdBQUcsQ0FBQyxDQUFDO1FBQzdFLGtCQUFhLEdBQVcsSUFBSSxtQkFBSyxDQUFDLEdBQUcsR0FBRyxHQUFHLEVBQUUsRUFBRSxHQUFHLEdBQUcsRUFBRSxHQUFHLEdBQUcsR0FBRyxFQUFFLEdBQUcsR0FBRyxHQUFHLENBQUMsQ0FBQztRQUM3RSxpQkFBWSxHQUFhLHFCQUFPLENBQUMsR0FBRyxDQUFDO1FBQ3JDLGtCQUFhLEdBQWEsSUFBSSxxQkFBTyxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFvQzdFLENBQUM7SUFsQ1csS0FBSztRQUNULElBQUksQ0FBQyxlQUFlLENBQUMsZ0JBQWdCLENBQUMsV0FBVyxDQUFDLEdBQUUsRUFBRTtZQUNsRCxJQUFHLElBQUksQ0FBQyxrQkFBa0IsSUFBSSxJQUFJLEVBQUU7Z0JBQ2hDLElBQUcsSUFBSSxDQUFDLGdCQUFnQixJQUFJLEtBQUssRUFBRTtvQkFDL0IsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUMsUUFBUSxDQUFDLEVBQUU7d0JBQzlCLFFBQVEsQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQztvQkFDeEMsQ0FBQyxDQUFDLENBQUM7aUJBQ047cUJBQ0k7b0JBQ0QsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUMsUUFBUSxDQUFDLEVBQUU7d0JBQzlCLFFBQVEsQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQztvQkFDdEMsQ0FBQyxDQUFDLENBQUM7aUJBQ047YUFDSjtZQUNELElBQUcsSUFBSSxDQUFDLGtCQUFrQixJQUFJLElBQUksRUFBRTtnQkFDaEMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUMsUUFBUSxDQUFDLEVBQUU7b0JBQzlCLFFBQVEsQ0FBQyxhQUFhLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUM7Z0JBQzNELENBQUMsQ0FBQyxDQUFDO2FBQ047UUFDTCxDQUFDLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxlQUFlLENBQUMsY0FBYyxDQUFDLFdBQVcsQ0FBQyxHQUFFLEVBQUU7WUFDaEQsSUFBRyxJQUFJLENBQUMsa0JBQWtCLElBQUksSUFBSSxFQUFFO2dCQUNoQyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsRUFBRTtvQkFDOUIsUUFBUSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDO2dCQUN2QyxDQUFDLENBQUMsQ0FBQzthQUNOO1lBQ0QsSUFBRyxJQUFJLENBQUMsa0JBQWtCLElBQUksSUFBSSxFQUFFO2dCQUNoQyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsRUFBRTtvQkFDOUIsUUFBUSxDQUFDLGFBQWEsQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQztnQkFDMUQsQ0FBQyxDQUFDLENBQUM7YUFDTjtRQUNMLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztDQUVKO0FBMURELGtDQTBEQyJ9","assetPath":"Assets/_Main/Script/Canvas/TS_ButtonEffect.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"onClickChangeScale","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Default\""]},{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"onClickChangeColor","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"btnImages","type":"UnityEngine.UI.Image[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"ZEPETO.Character.Controller","name":"zepetoScreenBtn","type":"ZEPETO.Character.Controller.ZepetoScreenButton","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"isUseCustomColor","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Custom
+    Color\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"customColor","type":"UnityEngine.Color","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"TS_ButtonEffect","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: a227dfe1ef9aaeec0558b2421eb050d8
+  onlyWriteTrigger: 0

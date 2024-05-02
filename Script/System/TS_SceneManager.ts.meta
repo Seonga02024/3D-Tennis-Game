@@ -1,0 +1,42 @@
+fileFormatVersion: 2
+guid: d10ce470633f5984aa1029c39dd3e877
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst SystemData_1 = require(\\\"../Data/SystemData\\\");\\r\\nconst
+    UnityEngine_SceneManagement_1 = require(\\\"UnityEngine.SceneManagement\\\");\\r\\nclass
+    TS_SceneManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        /* Values */\\r\\n        this.curScene
+    = SystemData_1.SceneType.None;\\r\\n        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\\r\\n   
+    }\\r\\n    static GetInstance() {\\r\\n        if (!TS_SceneManager.Instance)
+    {\\r\\n            const targetObj = UnityEngine_1.GameObject.Find(\\\"SceneManager\\\");\\r\\n           
+    if (targetObj)\\r\\n                TS_SceneManager.Instance = targetObj.GetComponent($typeof(TS_SceneManager));\\r\\n       
+    }\\r\\n        return TS_SceneManager.Instance;\\r\\n    }\\r\\n    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\\r\\n   
+    // Main Logic\\r\\n    Load(sceneType, callback) {\\r\\n        // set cur scene\\r\\n       
+    this.curScene = sceneType;\\r\\n        // load scene\\r\\n        this.StartCoroutine(this.loadProgress(sceneType,
+    callback));\\r\\n    }\\r\\n    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\\r\\n   
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\\r\\n   
+    // Load\\r\\n    *loadProgress(sceneType, callback) {\\r\\n        let asyncOp
+    = UnityEngine_SceneManagement_1.SceneManager.LoadSceneAsync(sceneType, UnityEngine_SceneManagement_1.LoadSceneMode.Additive);\\r\\n       
+    while (!asyncOp.isDone) { // \uD574\uB2F9 \uB3D9\uC791\uC774 \uC900\uBE44\uB418\uC5C8\uB294\uC9C0
+    \uC5EC\uBD80\\r\\n            yield null;\\r\\n        }\\r\\n        callback();\\r\\n   
+    }\\r\\n}\\r\\nexports.default = TS_SceneManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfU2NlbmVNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfU2NlbmVNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXlEO0FBQ3pELGlEQUFxRDtBQUNyRCxtREFBK0M7QUFDL0MsNkVBQTBFO0FBRTFFLE1BQXFCLGVBQWdCLFNBQVEscUNBQXFCO0lBQWxFOztRQUVJLFlBQVk7UUFDSixhQUFRLEdBQWUsc0JBQVMsQ0FBQyxJQUFJLENBQUM7UUFvQzlDLDBJQUEwSTtJQUM5SSxDQUFDO0lBakNVLE1BQU0sQ0FBQyxXQUFXO1FBQ3JCLElBQUksQ0FBQyxlQUFlLENBQUMsUUFBUSxFQUFFO1lBQzNCLE1BQU0sU0FBUyxHQUFHLHdCQUFVLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDO1lBQ2xELElBQUksU0FBUztnQkFDYixlQUFlLENBQUMsUUFBUSxHQUFHLFNBQVMsQ0FBQyxZQUFZLFNBQUMsZUFBZSxFQUFHLENBQUM7U0FDeEU7UUFDRCxPQUFPLGVBQWUsQ0FBQyxRQUFRLENBQUM7SUFDcEMsQ0FBQztJQUVELDBJQUEwSTtJQUMxSSxhQUFhO0lBRU4sSUFBSSxDQUFDLFNBQXFCLEVBQUUsUUFBcUI7UUFDcEQsZ0JBQWdCO1FBQ2hCLElBQUksQ0FBQyxRQUFRLEdBQUcsU0FBUyxDQUFDO1FBQzFCLGFBQWE7UUFDYixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxFQUFFLFFBQVEsQ0FBQyxDQUFDLENBQUM7SUFDaEUsQ0FBQztJQUVELDBJQUEwSTtJQUUxSSwwSUFBMEk7SUFDMUksT0FBTztJQUVDLENBQUUsWUFBWSxDQUFDLFNBQXFCLEVBQUUsUUFBcUI7UUFDL0QsSUFBSSxPQUFPLEdBQW9CLDBDQUFZLENBQUMsY0FBYyxDQUFDLFNBQVMsRUFBRSwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQzlGLE9BQU0sQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLEVBQUUsbUJBQW1CO1lBQ3hDLE1BQU0sSUFBSSxDQUFDO1NBQ2Q7UUFDRCxRQUFRLEVBQUUsQ0FBQztJQUNmLENBQUM7Q0FHSjtBQXhDRCxrQ0F3Q0MifQ==\",\"assetPath\":\"Assets/_Main/Script/System/TS_SceneManager.ts\",\"manifest\":{\"properties\":[],\"name\":\"TS_SceneManager\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: 373b28e9acf7d3ef5c863fa0c88e61db
+  onlyWriteTrigger: 0

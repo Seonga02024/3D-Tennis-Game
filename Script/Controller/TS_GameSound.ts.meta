@@ -1,0 +1,75 @@
+fileFormatVersion: 2
+guid: 0d75ab4ce95d1594eaacb26977d2eb7c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.SFX = exports.BGM = void 0;\r\nconst UnityEngine_1
+    = require(\"UnityEngine\");\r\nconst UnityEngine_2 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_3 = require(\"UnityEngine\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nvar
+    BGM;\r\n(function (BGM) {\r\n    BGM[BGM[\"Main\"] = 0] = \"Main\";\r\n    BGM[BGM[\"InDoor\"]
+    = 1] = \"InDoor\";\r\n})(BGM = exports.BGM || (exports.BGM = {}));\r\nvar SFX;\r\n(function
+    (SFX) {\r\n    SFX[SFX[\"TennisBallHitMe\"] = 0] = \"TennisBallHitMe\";\r\n   
+    SFX[SFX[\"TennisBallHitNotMe\"] = 1] = \"TennisBallHitNotMe\";\r\n    // UITouch
+    = 0,\r\n    // UIClose = 1,\r\n})(SFX = exports.SFX || (exports.SFX = {}));\r\nclass
+    TS_GameSound extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this.isPause = false;\r\n       
+    this.bgmCur = BGM.Main;\r\n        this.audioVolumeCur = 0;\r\n        this.checkMax
+    = 0.2;\r\n        this.checkMin = 1;\r\n    }\r\n    get IsPause() { return this.isPause;
+    }\r\n    static GetInstance() {\r\n        if (!TS_GameSound.Instance) {\r\n           
+    const targetObj = UnityEngine_2.GameObject.Find(\"GameSound\");\r\n           
+    if (targetObj)\r\n                TS_GameSound.Instance = targetObj.GetComponentInChildren($typeof(TS_GameSound));\r\n       
+    }\r\n        return TS_GameSound.Instance;\r\n    }\r\n    ////////////////////////////////////////////////////////////////////////////////\r\n   
+    sfxPlay(sfx) {\r\n        this.sfxSource[sfx].Play();\r\n    }\r\n    bgmPlay()
+    {\r\n        if (!this.audioSource.isPlaying) {\r\n            if (this.isPause)
+    {\r\n                this.isPause = false;\r\n                this.audioSource.UnPause();\r\n           
+    }\r\n            else {\r\n                this.audioSource.clip = this.bgmSources[this.bgmCur];\r\n               
+    this.audioSource.Play();\r\n                this.StartCoroutine(this.fadeIn());\r\n           
+    }\r\n        }\r\n        else {\r\n            if (this.fadeOutCoroutine !=
+    null) {\r\n                this.StopCoroutine(this.fadeOutCoroutine);\r\n           
+    }\r\n            this.fadeOutCoroutine = this.StartCoroutine(this.fadeOut());\r\n       
+    }\r\n    }\r\n    bgmPause() {\r\n        if (this.audioSource.isPlaying) {\r\n           
+    this.audioSource.Pause();\r\n            this.isPause = true;\r\n        }\r\n   
+    }\r\n    bgmSet(index, maxSound) {\r\n        this.bgmCur = index;\r\n       
+    this.checkMax = maxSound;\r\n    }\r\n    ////////////////////////////////////////////////////////////////////////////////\r\n   
+    // 1sec\r\n    *fadeOut() {\r\n        this.audioVolumeCur = this.checkMin;\r\n       
+    let minIntervalTime = UnityEngine_3.Time.deltaTime;\r\n        while (true) {\r\n           
+    if (this.audioVolumeCur > 0) {\r\n                this.audioVolumeCur -= (this.checkMin
+    * minIntervalTime);\r\n                this.audioSource.volume = this.audioVolumeCur;\r\n               
+    yield new UnityEngine_1.WaitForSeconds(minIntervalTime);\r\n            }\r\n           
+    else {\r\n                break;\r\n            }\r\n        }\r\n        this.audioSource.clip
+    = this.bgmSources[this.bgmCur];\r\n        this.audioSource.Play();\r\n       
+    this.StartCoroutine(this.fadeIn());\r\n        this.audioSource.volume = this.audioVolume;\r\n       
+    this.checkMin = this.checkMax;\r\n    }\r\n    // 1sec\r\n    *fadeIn() {\r\n       
+    this.audioSource.volume = 0;\r\n        this.audioVolumeCur = 0;\r\n        let
+    minIntervalTime = UnityEngine_3.Time.deltaTime;\r\n        while (true) {\r\n           
+    if (this.audioVolumeCur < this.checkMax) {\r\n                this.audioVolumeCur
+    += (this.audioVolume * minIntervalTime);\r\n                this.audioSource.volume
+    = this.audioVolumeCur;\r\n                yield new UnityEngine_1.WaitForSeconds(minIntervalTime);\r\n           
+    }\r\n            else {\r\n                break;\r\n            }\r\n       
+    }\r\n    }\r\n    // 0 ~ 1\r\n    setAudioMixer(value) {\r\n        if (value
+    < 0.0001) {\r\n            this.audioMixer.SetFloat(''Master'', -80);\r\n       
+    }\r\n        else {\r\n            this.audioMixer.SetFloat(''Master'', UnityEngine_3.Mathf.Log10(value)
+    * 20);\r\n        }\r\n    }\r\n    Awake() {\r\n        this.audioSource = this.GetComponent($typeof(UnityEngine_3.AudioSource));\r\n       
+    this.audioVolume = this.audioSource.volume;\r\n    }\r\n    Start() {\r\n       
+    //this.bgmSet(BGM.InDoor, 1);\r\n        //this.bgmPlay();\r\n        //this.audioSource.clip
+    = this.bgmSources[this.bgmCur];\r\n        //this.audioSource.Play();\r\n   
+    }\r\n}\r\nexports.default = TS_GameSound;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfR2FtZVNvdW5kLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVFNfR2FtZVNvdW5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLDZDQUE2QztBQUM3Qyw2Q0FBeUM7QUFDekMsNkNBQTZFO0FBRTdFLGlEQUFxRDtBQUVyRCxJQUFZLEdBR1g7QUFIRCxXQUFZLEdBQUc7SUFDWCw2QkFBUSxDQUFBO0lBQ1IsaUNBQVUsQ0FBQTtBQUNkLENBQUMsRUFIVyxHQUFHLEdBQUgsV0FBRyxLQUFILFdBQUcsUUFHZDtBQUVELElBQVksR0FLWDtBQUxELFdBQVksR0FBRztJQUNYLG1EQUFtQixDQUFBO0lBQ25CLHlEQUFzQixDQUFBO0lBQ3RCLGVBQWU7SUFDZixlQUFlO0FBQ25CLENBQUMsRUFMVyxHQUFHLEdBQUgsV0FBRyxLQUFILFdBQUcsUUFLZDtBQUdELE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFBL0Q7O1FBaUJZLFlBQU8sR0FBYSxLQUFLLENBQUM7UUFFMUIsV0FBTSxHQUFTLEdBQUcsQ0FBQyxJQUFJLENBQUM7UUFFeEIsbUJBQWMsR0FBWSxDQUFDLENBQUM7UUFFNUIsYUFBUSxHQUFZLEdBQUcsQ0FBQztRQUN4QixhQUFRLEdBQVksQ0FBQyxDQUFDO0lBaUhsQyxDQUFDO0lBdkhHLElBQVcsT0FBTyxLQUFLLE9BQU8sSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7SUFVdEMsTUFBTSxDQUFDLFdBQVc7UUFDckIsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLEVBQUU7WUFDeEIsTUFBTSxTQUFTLEdBQUcsd0JBQVUsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUM7WUFDL0MsSUFBSSxTQUFTO2dCQUNiLFlBQVksQ0FBQyxRQUFRLEdBQUcsU0FBUyxDQUFDLHNCQUFzQixTQUFDLFlBQVksRUFBRyxDQUFDO1NBQzVFO1FBQ0QsT0FBTyxZQUFZLENBQUMsUUFBUSxDQUFDO0lBQ2pDLENBQUM7SUFFRCxnRkFBZ0Y7SUFFekUsT0FBTyxDQUFDLEdBQVM7UUFDcEIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUMvQixDQUFDO0lBRU0sT0FBTztRQUNWLElBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsRUFBRTtZQUM1QixJQUFHLElBQUksQ0FBQyxPQUFPLEVBQUU7Z0JBQ2IsSUFBSSxDQUFDLE9BQU8sR0FBRyxLQUFLLENBQUM7Z0JBQ3JCLElBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFLENBQUM7YUFDOUI7aUJBQ0k7Z0JBQ0QsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7Z0JBQ3JELElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxFQUFFLENBQUM7Z0JBQ3hCLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLENBQUM7YUFDdEM7U0FDSjthQUNHO1lBQ0EsSUFBRyxJQUFJLENBQUMsZ0JBQWdCLElBQUksSUFBSSxFQUFFO2dCQUM5QixJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO2FBQzdDO1lBQ0QsSUFBSSxDQUFDLGdCQUFnQixHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLE9BQU8sRUFBRSxDQUFDLENBQUM7U0FDL0Q7SUFDTCxDQUFDO0lBRU0sUUFBUTtRQUNYLElBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxTQUFTLEVBQUU7WUFDM0IsSUFBSSxDQUFDLFdBQVcsQ0FBQyxLQUFLLEVBQUUsQ0FBQztZQUN6QixJQUFJLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQztTQUN2QjtJQUNMLENBQUM7SUFFTSxNQUFNLENBQUMsS0FBVyxFQUFFLFFBQWlCO1FBQ3hDLElBQUksQ0FBQyxNQUFNLEdBQUcsS0FBSyxDQUFDO1FBQ3BCLElBQUksQ0FBQyxRQUFRLEdBQUcsUUFBUSxDQUFDO0lBQzdCLENBQUM7SUFFRCxnRkFBZ0Y7SUFFaEYsT0FBTztJQUNDLENBQUUsT0FBTztRQUNiLElBQUksQ0FBQyxjQUFjLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQztRQUNwQyxJQUFJLGVBQWUsR0FBWSxrQkFBSSxDQUFDLFNBQVMsQ0FBQztRQUM5QyxPQUFPLElBQUksRUFBRTtZQUNULElBQUcsSUFBSSxDQUFDLGNBQWMsR0FBRyxDQUFDLEVBQUU7Z0JBQ3hCLElBQUksQ0FBQyxjQUFjLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxHQUFHLGVBQWUsQ0FBQyxDQUFDO2dCQUN6RCxJQUFJLENBQUMsV0FBVyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDO2dCQUM5QyxNQUFNLElBQUksNEJBQWMsQ0FBQyxlQUFlLENBQUMsQ0FBQzthQUM3QztpQkFDSTtnQkFDRCxNQUFNO2FBQ1Q7U0FDSjtRQUNELElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ3JELElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDeEIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsQ0FBQztRQUNuQyxJQUFJLENBQUMsV0FBVyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsV0FBVyxDQUFDO1FBQzNDLElBQUksQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQztJQUNsQyxDQUFDO0lBRUQsT0FBTztJQUNDLENBQUUsTUFBTTtRQUNaLElBQUksQ0FBQyxXQUFXLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQztRQUM1QixJQUFJLENBQUMsY0FBYyxHQUFHLENBQUMsQ0FBQztRQUN4QixJQUFJLGVBQWUsR0FBWSxrQkFBSSxDQUFDLFNBQVMsQ0FBQztRQUM5QyxPQUFPLElBQUksRUFBRTtZQUNULElBQUcsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLENBQUMsUUFBUSxFQUFFO2dCQUNwQyxJQUFJLENBQUMsY0FBYyxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsR0FBRyxlQUFlLENBQUMsQ0FBQztnQkFDNUQsSUFBSSxDQUFDLFdBQVcsQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQztnQkFDOUMsTUFBTSxJQUFJLDRCQUFjLENBQUMsZUFBZSxDQUFDLENBQUM7YUFDN0M7aUJBQ0k7Z0JBQ0QsTUFBTTthQUNUO1NBQ0o7SUFDTCxDQUFDO0lBRUQsUUFBUTtJQUNBLGFBQWEsQ0FBQyxLQUFjO1FBQ2hDLElBQUcsS0FBSyxHQUFHLE1BQU0sRUFBRTtZQUNmLElBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLFFBQVEsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDO1NBQzNDO2FBQ0k7WUFDRCxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsbUJBQUssQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLEdBQUcsRUFBRSxDQUFDLENBQUM7U0FDL0Q7SUFDTCxDQUFDO0lBRU8sS0FBSztRQUNULElBQUksQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDLFlBQVksU0FBQyx5QkFBVyxFQUFHLENBQUM7UUFDcEQsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUMsV0FBVyxDQUFDLE1BQU0sQ0FBQztJQUMvQyxDQUFDO0lBRU8sS0FBSztRQUNULDZCQUE2QjtRQUM3QixpQkFBaUI7UUFDakIsdURBQXVEO1FBQ3ZELDBCQUEwQjtJQUM5QixDQUFDO0NBRUo7QUF6SUQsK0JBeUlDIn0=","assetPath":"Assets/_Main/Script/Controller/TS_GameSound.ts","manifest":{"properties":[{"assembly":"UnityEngine.AudioModule","name":"audioMixer","type":"UnityEngine.Audio.AudioMixer","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"[Object
+    Setting]\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.AudioModule","name":"bgmSources","type":"UnityEngine.AudioClip[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"[BGM]\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.AudioModule","name":"sfxSource","type":"UnityEngine.AudioSource[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"[SFX]\""]},{"name":"SerializeField","args":[]}]}],"name":"TS_GameSound","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 142a3551d4f438fb3f5a94b0a9622ebc
+  onlyWriteTrigger: 0

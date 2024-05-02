@@ -1,0 +1,64 @@
+fileFormatVersion: 2
+guid: fb79e2a8f960a7a4fbdc3834318cf15a
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.TennisPlayerMotion = void 0;\r\nconst UnityEngine_1
+    = require(\"UnityEngine\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    TS_ClientStarter_1 = require(\"../../TS_ClientStarter\");\r\nconst TS_PlayerControllerManager_1
+    = require(\"../../Controller/TS_PlayerControllerManager\");\r\nconst TS_GameManager_1
+    = require(\"../TS_GameManager\");\r\nvar TennisPlayerMotion;\r\n(function (TennisPlayerMotion)
+    {\r\n    TennisPlayerMotion[\"isForehandHit\"] = \"isForehandHit\";\r\n    TennisPlayerMotion[\"isBackhandHit\"]
+    = \"isBackhandHit\";\r\n})(TennisPlayerMotion = exports.TennisPlayerMotion ||
+    (exports.TennisPlayerMotion = {}));\r\nclass TS_PlayerController extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.zepetoCharacter
+    = null;\r\n        this.animator = null;\r\n        /* Values */\r\n        this.isInit
+    = false;\r\n        this.isLocalPlayer = false;\r\n        this.sessionId = \"\";\r\n       
+    this.currentCollBall = false;\r\n        /* Change Stat */\r\n        this.currentAccuracy
+    = 1;\r\n    }\r\n    get GetSesstionID() { return this.sessionId; }\r\n    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\r\n   
+    // Main Logic\r\n    Init(zepetoCharacter, isLocalPlayer, sessionId) {\r\n       
+    this.zepetoCharacter = zepetoCharacter;\r\n        this.animator = this.zepetoCharacter.gameObject.GetComponentInChildren($typeof(UnityEngine_1.Animator));\r\n       
+    this.isLocalPlayer = isLocalPlayer;\r\n        this.sessionId = sessionId;\r\n       
+    this.isInit = true;\r\n        //console.log(`charaterOriginRunSpeed ${this.charaterOriginRunSpeed}`);\r\n   
+    }\r\n    UpPlayerSpeed(speedNum) {\r\n        this.zepetoCharacter.additionalRunSpeed
+    = speedNum;\r\n        console.log(`UpPlayerSpeed ${this.zepetoCharacter.RunSpeed}`);\r\n   
+    }\r\n    UpPlayerPower(powerNum) {\r\n        console.log(`UpPlayerPower ${powerNum}`);\r\n   
+    }\r\n    UpAccuracy(accuracyNum) {\r\n        console.log(`UpAccuracy ${accuracyNum}`);\r\n   
+    }\r\n    ResetBuff() {\r\n        this.zepetoCharacter.additionalRunSpeed = 0;\r\n       
+    console.log(`ResetBuff ${this.zepetoCharacter.RunSpeed}`);\r\n    }\r\n    //
+    touch ui -> call\r\n    HitBall(pos) {\r\n        if (TS_GameManager_1.default.GetInstance().isGameStart
+    == false)\r\n            return;\r\n        if (this.currentCollBall) {\r\n           
+    TS_GameManager_1.default.GetInstance().CheckCanHitBall(pos, false);\r\n       
+    }\r\n        this.playPlayerHitAnimation(TS_ClientStarter_1.default.GetInstance().GetBall());\r\n   
+    }\r\n    playPlayerAnimation(tennisAni, isActive) {\r\n        console.log(`playPlayerAnimation
+    ${tennisAni} ${isActive}`);\r\n        switch (tennisAni) {\r\n            case
+    TennisPlayerMotion.isForehandHit:\r\n                this.animator.SetTrigger(TennisPlayerMotion.isForehandHit);\r\n               
+    break;\r\n            case TennisPlayerMotion.isBackhandHit:\r\n               
+    this.animator.SetTrigger(TennisPlayerMotion.isBackhandHit);\r\n               
+    break;\r\n        }\r\n    }\r\n    setHandTennisObj(rightT, leftT) {\r\n       
+    this.rightHandTennis = rightT;\r\n        this.leftHandTennis = leftT;\r\n       
+    this.leftHandTennis.SetActive(false);\r\n    }\r\n    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\r\n   
+    // \r\n    playPlayerHitAnimation(ballPos) {\r\n        let ballDir = UnityEngine_1.Vector3.op_Subtraction(ballPos.gameObject.transform.position,
+    this.transform.position);\r\n        if (ballDir.x > 0) {\r\n            TS_PlayerControllerManager_1.default.GetInstance().SendAnimationData(this.sessionId,
+    TennisPlayerMotion.isForehandHit, true);\r\n            //console.log(`forehand`);\r\n       
+    }\r\n        else {\r\n            TS_PlayerControllerManager_1.default.GetInstance().SendAnimationData(this.sessionId,
+    TennisPlayerMotion.isBackhandHit, true);\r\n            //console.log(`backhand`);\r\n       
+    }\r\n    }\r\n}\r\nexports.default = TS_PlayerController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfUGxheWVyQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRTX1BsYXllckNvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsNkNBQTREO0FBRTVELGlEQUFxRDtBQUNyRCw2REFBc0Q7QUFDdEQsNEZBQXFGO0FBQ3JGLHNEQUErQztBQUUvQyxJQUFZLGtCQUdYO0FBSEQsV0FBWSxrQkFBa0I7SUFDMUIscURBQStCLENBQUE7SUFDL0IscURBQStCLENBQUE7QUFDbkMsQ0FBQyxFQUhXLGtCQUFrQixHQUFsQiwwQkFBa0IsS0FBbEIsMEJBQWtCLFFBRzdCO0FBRUQsTUFBcUIsbUJBQW9CLFNBQVEscUNBQXFCO0lBQXRFOztRQUVZLG9CQUFlLEdBQXFCLElBQUksQ0FBQztRQUN6QyxhQUFRLEdBQWMsSUFBSSxDQUFDO1FBRW5DLFlBQVk7UUFDSixXQUFNLEdBQWEsS0FBSyxDQUFDO1FBQ3pCLGtCQUFhLEdBQWEsS0FBSyxDQUFDO1FBQ2hDLGNBQVMsR0FBWSxFQUFFLENBQUM7UUFFekIsb0JBQWUsR0FBYSxLQUFLLENBQUM7UUFHekMsaUJBQWlCO1FBQ1Qsb0JBQWUsR0FBWSxDQUFDLENBQUM7SUE0RXpDLENBQUM7SUFqRkcsSUFBVyxhQUFhLEtBQUssT0FBTyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQztJQVVyRCwwSUFBMEk7SUFDMUksYUFBYTtJQUVOLElBQUksQ0FBQyxlQUFpQyxFQUFFLGFBQXVCLEVBQUUsU0FBa0I7UUFDdEYsSUFBSSxDQUFDLGVBQWUsR0FBRyxlQUFlLENBQUM7UUFDdkMsSUFBSSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDLFVBQVUsQ0FBQyxzQkFBc0IsU0FBQyxzQkFBUSxFQUFHLENBQUM7UUFDbkYsSUFBSSxDQUFDLGFBQWEsR0FBRyxhQUFhLENBQUM7UUFDbkMsSUFBSSxDQUFDLFNBQVMsR0FBRyxTQUFTLENBQUM7UUFDM0IsSUFBSSxDQUFD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","assetPath":"Assets/_Main/Script/System/Player/TS_PlayerController.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"currentCollBall","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"currentCollBallObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"TS_PlayerController","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 72cfd35c9d84048a7a61f09e8c225258
+  onlyWriteTrigger: 0

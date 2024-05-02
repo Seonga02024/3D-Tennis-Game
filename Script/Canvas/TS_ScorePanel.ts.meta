@@ -1,0 +1,45 @@
+fileFormatVersion: 2
+guid: 839771c28766b454aa1b2a96aa22d957
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    TS_ScorePanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    ChangeMatchText(matchNum)
+    {\r\n        this.matchText.text = \"match \" + matchNum.toString();\r\n    }\r\n   
+    ChangeScorePanel(setScore1, setScore2, score1, score2, round) {\r\n        this.score1Text.text
+    = score1.toString();\r\n        this.score2Text.text = score2.toString();\r\n       
+    this.setScore1Text.text = setScore1.toString();\r\n        this.setScore2Text.text
+    = setScore2.toString();\r\n        this.rountText.text = round.toString() + \"
+    Round\";\r\n        if (score1 == 0 && score2 == 0 && round == 1) {\r\n           
+    this.OnScorePanel(false);\r\n            this.SetGamePlayerInfo(null, '''', null,
+    '''');\r\n        }\r\n        else {\r\n            this.OnScorePanel(true);\r\n       
+    }\r\n    }\r\n    OnScorePanel(isActive) {\r\n        this.GameStartUI.SetActive(isActive);\r\n   
+    }\r\n    SetGamePlayerInfo(player1Profile, player1NickName, player2Profile, player2NickName)
+    {\r\n        this.player1Img.texture = player1Profile;\r\n        this.player1Text.text
+    = player1NickName;\r\n        this.player2Img.texture = player2Profile;\r\n       
+    this.player2Text.text = player2NickName;\r\n    }\r\n    ChangeMyTurnText(num,
+    num2) {\r\n        if (this.myTurnText.text != num.toString()) {\r\n           
+    this.myTurnText.text = \"my turn : \" + num.toString();\r\n        }\r\n       
+    if (this.myTurnSeverText.text != num2.toString()) {\r\n            this.myTurnSeverText.text
+    = \"my sever turn : \" + num2.toString();\r\n        }\r\n    }\r\n}\r\nexports.default
+    = TS_ScorePanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfU2NvcmVQYW5lbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRTX1Njb3JlUGFuZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFJQSxpREFBcUQ7QUFFckQsTUFBcUIsYUFBYyxTQUFRLHFDQUFxQjtJQXFCckQsZUFBZSxDQUFDLFFBQWlCO1FBQ3BDLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxHQUFHLFFBQVEsR0FBRyxRQUFRLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDekQsQ0FBQztJQUVNLGdCQUFnQixDQUFDLFNBQWtCLEVBQUUsU0FBa0IsRUFBRSxNQUFlLEVBQUUsTUFBZSxFQUFFLEtBQWM7UUFDNUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEdBQUcsTUFBTSxDQUFDLFFBQVEsRUFBRSxDQUFDO1FBQ3pDLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxHQUFHLE1BQU0sQ0FBQyxRQUFRLEVBQUUsQ0FBQztRQUN6QyxJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksR0FBRyxTQUFTLENBQUMsUUFBUSxFQUFFLENBQUM7UUFDL0MsSUFBSSxDQUFDLGFBQWEsQ0FBQyxJQUFJLEdBQUcsU0FBUyxDQUFDLFFBQVEsRUFBRSxDQUFDO1FBQy9DLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxHQUFHLEtBQUssQ0FBQyxRQUFRLEVBQUUsR0FBRyxRQUFRLENBQUM7UUFFbEQsSUFBRyxNQUFNLElBQUksQ0FBQyxJQUFJLE1BQU0sSUFBSSxDQUFDLElBQUksS0FBSyxJQUFJLENBQUMsRUFBQztZQUN4QyxJQUFJLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQ3pCLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLEVBQUUsRUFBRSxFQUFFLElBQUksRUFBRSxFQUFFLENBQUMsQ0FBQztTQUM5QzthQUFJO1lBQ0QsSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUMzQjtJQUNMLENBQUM7SUFFTSxZQUFZLENBQUMsUUFBa0I7UUFDbEMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDekMsQ0FBQztJQUVNLGlCQUFpQixDQUFDLGNBQXdCLEVBQUUsZUFBd0IsRUFBRSxjQUF3QixFQUFFLGVBQXdCO1FBQzNILElBQUksQ0FBQyxVQUFVLENBQUMsT0FBTyxHQUFHLGNBQWMsQ0FBQztRQUN6QyxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksR0FBRyxlQUFlLENBQUM7UUFDeEMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxPQUFPLEdBQUcsY0FBYyxDQUFDO1FBQ3pDLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxHQUFHLGVBQWUsQ0FBQztJQUM1QyxDQUFDO0lBRU0sZ0JBQWdCLENBQUMsR0FBWSxFQUFFLElBQWE7UUFDL0MsSUFBRyxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksSUFBSSxHQUFHLENBQUMsUUFBUSxFQUFFLEVBQUM7WUFDdEMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEdBQUcsWUFBWSxHQUFHLEdBQUcsQ0FBQyxRQUFRLEVBQUUsQ0FBQztTQUN4RDtRQUVELElBQUcsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLElBQUksSUFBSSxDQUFDLFFBQVEsRUFBRSxFQUFDO1lBQzVDLElBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxHQUFHLGtCQUFrQixHQUFHLElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQztTQUNwRTtJQUNMLENBQUM7Q0FDSjtBQTVERCxnQ0E0REMifQ==","assetPath":"Assets/_Main/Script/Canvas/TS_ScorePanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mainPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Game
+    Score\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"GameStartUI","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"score1Text","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"score2Text","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"setScore1Text","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"setScore2Text","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"rountText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"matchText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"player1Img","type":"UnityEngine.UI.RawImage","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Player
+    Info\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"player1Text","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"player2Img","type":"UnityEngine.UI.RawImage","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"player2Text","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"myTurnText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"myTurnSeverText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"TS_ScorePanel","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 5d6aa7a19c95cbdb2a25fcc9e59d3fbe
+  onlyWriteTrigger: 0

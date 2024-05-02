@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 93ac74f688848304b9eb272101239c71
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.SceneType = exports.Layer = exports.GRAVITY = void
+    0;\r\nexports.GRAVITY = 30;\r\nvar Layer;\r\n(function (Layer) {\r\n    Layer[Layer[\"Player\"]
+    = 20] = \"Player\";\r\n    Layer[Layer[\"Map\"] = 21] = \"Map\";\r\n})(Layer
+    = exports.Layer || (exports.Layer = {}));\r\nvar SceneType;\r\n(function (SceneType)
+    {\r\n    SceneType[\"None\"] = \"None\";\r\n    SceneType[\"Main\"] = \"Main\";\r\n   
+    SceneType[\"Asset\"] = \"Asset\";\r\n    SceneType[\"Dummy\"] = \"Dummy\";\r\n})(SceneType
+    = exports.SceneType || (exports.SceneType = {}));\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3lzdGVtRGF0YS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlN5c3RlbURhdGEudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQWEsUUFBQSxPQUFPLEdBQVksRUFBRSxDQUFDO0FBRW5DLElBQVksS0FHWDtBQUhELFdBQVksS0FBSztJQUNiLHNDQUFXLENBQUE7SUFDWCxnQ0FBUSxDQUFBO0FBQ1osQ0FBQyxFQUhXLEtBQUssR0FBTCxhQUFLLEtBQUwsYUFBSyxRQUdoQjtBQUVELElBQVksU0FLWDtBQUxELFdBQVksU0FBUztJQUNqQiwwQkFBYSxDQUFBO0lBQ2IsMEJBQWEsQ0FBQTtJQUNiLDRCQUFlLENBQUE7SUFDZiw0QkFBZSxDQUFBO0FBQ25CLENBQUMsRUFMVyxTQUFTLEdBQVQsaUJBQVMsS0FBVCxpQkFBUyxRQUtwQiJ9","assetPath":"Assets/_Main/Script/Data/SystemData.ts","manifest":{"properties":[],"name":"SystemData","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 340689ddec22ddfd4227f5ee28303eb9
+  onlyWriteTrigger: 0

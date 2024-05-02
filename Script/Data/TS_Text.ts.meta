@@ -1,0 +1,57 @@
+fileFormatVersion: 2
+guid: c2fde569e2713b54692b0a9710f812e2
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_Events_1 = require(\\\"UnityEngine.Events\\\");\\r\\nconst ZEPETO_Script_1
+    = require(\\\"ZEPETO.Script\\\");\\r\\nclass TS_Text extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        /*
+    Event */\\r\\n        this.OnLanguageChanged = new UnityEngine_Events_1.UnityEvent();\\r\\n       
+    // Language\\r\\n        this.mCurLanguage = 1 /* Language.English */;\\r\\n   
+    }\\r\\n    static GetInstance() {\\r\\n        if (!TS_Text.Instance) {\\r\\n           
+    const targetObj = UnityEngine_1.GameObject.Find(\\\"TextController\\\");\\r\\n           
+    if (targetObj)\\r\\n                TS_Text.Instance = targetObj.GetComponent($typeof(TS_Text));\\r\\n       
+    }\\r\\n        return TS_Text.Instance;\\r\\n    }\\r\\n    get CurLanguage()
+    { return this.mCurLanguage; }\\r\\n    setLanguage(language) {\\r\\n        this.mCurLanguage
+    = language;\\r\\n        this.OnLanguageChanged.Invoke();\\r\\n    }\\r\\n   
+    GetRightFont() {\\r\\n        if (this.mCurLanguage == 5 /* Language.Thai */)
+    {\\r\\n            return this.tiTont;\\r\\n        }\\r\\n        else {\\r\\n           
+    return this.defaultFont;\\r\\n        }\\r\\n    }\\r\\n    SetLanguageToDeviceDefaultLanguage()
+    {\\r\\n        // \uD604\uC7AC \uC7A5\uCE58 \uC5B8\uC5B4 \uBD88\uB7EC\uC624\uAE30\\r\\n       
+    switch (UnityEngine_1.Application.systemLanguage) {\\r\\n            // \uD55C\uAD6D\uC5B4\\r\\n           
+    case 23:\\r\\n                this.setLanguage(0 /* Language.Korean */);\\r\\n               
+    break;\\r\\n            // \uC601\uC5B4\\r\\n            case 10:\\r\\n               
+    this.setLanguage(1 /* Language.English */);\\r\\n                break;\\r\\n           
+    // \uD504\uB791\uC2A4\\r\\n            case 14:\\r\\n                this.setLanguage(7
+    /* Language.French */);\\r\\n                break;\\r\\n            // \uC77C\uBCF8\uC5B4\\r\\n           
+    case 22:\\r\\n                this.setLanguage(2 /* Language.Japanese */);\\r\\n               
+    break;\\r\\n            // \uC911\uAD6D\uC5B4\\r\\n            case 6:\\r\\n               
+    this.setLanguage(3 /* Language.Chinese */);\\r\\n                break;\\r\\n           
+    // \uC911\uAD6D\uC5B4 \uAC04\uCCB4\\r\\n            case 40:\\r\\n           
+    case 41:\\r\\n                this.setLanguage(6 /* Language.ChineseSimplified
+    */);\\r\\n                break;\\r\\n            // \uC778\uB3C4\uB124\uC2DC\uC544\uC5B4\\r\\n           
+    case 20:\\r\\n                this.setLanguage(4 /* Language.Indonesian */);\\r\\n               
+    break;\\r\\n            // \uD0DC\uAD6D\uC5B4\\r\\n            case 36:\\r\\n               
+    this.setLanguage(5 /* Language.Thai */);\\r\\n                break;\\r\\n           
+    // \uAE30\uBCF8 : \uC601\uC5B4\\r\\n            default:\\r\\n               
+    this.setLanguage(1 /* Language.English */);\\r\\n                break;\\r\\n       
+    }\\r\\n    }\\r\\n}\\r\\nexports.default = TS_Text;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVFNfVGV4dC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRTX1RleHQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBNEQ7QUFDNUQsMkRBQWdEO0FBQ2hELGlEQUFxRDtBQWFyRCxNQUFxQixPQUFRLFNBQVEscUNBQXFCO0lBQTFEOztRQU1JLFdBQVc7UUFDSixzQkFBaUIsR0FBZ0IsSUFBSSwrQkFBVSxFQUFFLENBQUM7UUFhekQsV0FBVztRQUNILGlCQUFZLDRCQUErQjtJQTJEdkQsQ0FBQztJQXJFVSxNQUFNLENBQUMsV0FBVztRQUNyQixJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsRUFBRTtZQUNuQixNQUFNLFNBQVMsR0FBRyx3QkFBVSxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1lBQ3BELElBQUksU0FBUztnQkFDYixPQUFPLENBQUMsUUFBUSxHQUFHLFNBQVMsQ0FBQyxZQUFZLFNBQUMsT0FBTyxFQUFHLENBQUM7U0FDeEQ7UUFDRCxPQUFPLE9BQU8sQ0FBQyxRQUFRLENBQUM7SUFDNUIsQ0FBQztJQUlELElBQVcsV0FBVyxLQUFLLE9BQU8sSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7SUFDL0MsV0FBVyxDQUFDLFFBQW1CO1FBQ2xDLElBQUksQ0FBQyxZQUFZLEdBQUcsUUFBUSxDQUFDO1FBQzdCLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxNQUFNLEVBQUUsQ0FBQztJQUNwQyxDQUFDO0lBRU0sWUFBWTtRQUNmLElBQUcsSUFBSSxDQUFDLFlBQVkseUJBQWlCLEVBQUM7WUFDbEMsT0FBTyxJQUFJLENBQUMsTUFBTSxDQUFDO1NBQ3RCO2FBQ0k7WUFDRCxPQUFPLElBQUksQ0FBQyxXQUFXLENBQUM7U0FDM0I7SUFDTCxDQUFDO0lBRU0sa0NBQWtDO1FBQ3JDLGdCQUFnQjtRQUNoQixRQUFRLHlCQUFXLENBQUMsY0FBYyxFQUFFO1lBQ2hDLE1BQU07WUFDTixLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxDQUFDLFdBQVcseUJBQWlCLENBQUM7Z0JBQ2xDLE1BQU07WUFDVixLQUFLO1lBQ0wsS0FBSyxFQUFFO2dCQUNILElBQUksQ0FBQyxXQUFXLDBCQUFrQixDQUFDO2dCQUNuQyxNQUFNO1lBQ1YsTUFBTTtZQUNOLEtBQUssRUFBRTtnQkFDSCxJQUFJLENBQUMsV0FBVyx5QkFBaUIsQ0FBQztnQkFDbEMsTUFBTTtZQUNWLE1BQU07WUFDTixLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxDQUFDLFdBQVcsMkJBQW1CLENBQUM7Z0JBQ3BDLE1BQU07WUFDVixNQUFNO1lBQ04sS0FBSyxDQUFDO2dCQUNGLElBQUksQ0FBQyxXQUFXLDBCQUFrQixDQUFDO2dCQUNuQyxNQUFNO1lBQ1YsU0FBUztZQUNULEtBQUssRUFBRSxDQUFDO1lBQ1IsS0FBSyxFQUFFO2dCQUNILElBQUksQ0FBQyxXQUFXLG9DQUE0QixDQUFDO2dCQUM3QyxNQUFNO1lBQ1YsU0FBUztZQUNULEtBQUssRUFBRTtnQkFDSCxJQUFJLENBQUMsV0FBVyw2QkFBcUIsQ0FBQztnQkFDdEMsTUFBTTtZQUNWLE1BQU07WUFDTixLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxDQUFDLFdBQVcsdUJBQWUsQ0FBQztnQkFDaEMsTUFBTTtZQUNWLFVBQVU7WUFDVjtnQkFDSSxJQUFJLENBQUMsV0FBVywwQkFBa0IsQ0FBQztnQkFDbkMsTUFBTTtTQUNiO0lBQ0wsQ0FBQztDQUVKO0FBaEZELDBCQWdGQyJ9\",\"assetPath\":\"Assets/_Main/Script/Data/TS_Text.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.TextRenderingModule\",\"name\":\"tiTont\",\"type\":\"UnityEngine.Font\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.TextRenderingModule\",\"name\":\"defaultFont\",\"type\":\"UnityEngine.Font\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"OnLanguageChanged\",\"type\":\"UnityEngine.Events.UnityEvent\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"TS_Text\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: 183d188955c1eb85cd04d219d1c3d201
+  onlyWriteTrigger: 0
